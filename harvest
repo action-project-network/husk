@@ -1,0 +1,14 @@
+#!/bin/bash
+# Author: Shree Raj Shrestha
+# Date: 01/01/2025
+set -ueox pipefail
+WHICH_COB=$1 && WHICH_SEED=$2 && WHICH_RECIPE=$3 && WHICH_SCOPE=$4
+
+cp "./silo/${WHICH_COB}.cob" .cob
+if [ ! -f ".cob" ] || [ ! -f "seed" ] || [ ! -f "sprout" ]; then echo "required files absent" && exit 1; fi
+HARVEST_HOME="${HOME}/.husk/.harvest/" && HARVEST="/.husk/.harvest/"
+
+podman build -t soil -f ./Soil . && podman build -t pot -f ./Pot .
+podman container rm --force "${WHICH_SEED}"
+podman run -d --name "${WHICH_COB}.${WHICH_SEED}" -e WHICH_SEED="${WHICH_SEED}" -e WHICH_RECIPE="${WHICH_RECIPE}" -e WHICH_SCOPE="${WHICH_SCOPE}" -v "${HARVEST_HOME}":"${HARVEST}":z -it pot
+podman logs -f "${WHICH_COB}.${WHICH_SEED}" && echo "${WHICH_SEED} harvested" && rm -rf .cob

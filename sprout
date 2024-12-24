@@ -1,0 +1,29 @@
+#!/bin/bash
+# Author: Shree Raj Shrestha
+# Date: 12/21/2024
+set -ueox pipefail
+WHICH_SEED=$1 && WHICH_RECIPE=$2 && WHICH_PREP=$3 && TEMP="/.husk/tmp/${RANDOM}/"
+BUILD_PREP=$(jq -r ".${WHICH_SEED}.prep.build" /.husk/.cob) && TEST_PREP=$(jq -r ".${WHICH_SEED}.prep.test" /.husk/.cob) && PUBLISH_PREP=$(jq -r ".${WHICH_SEED}.prep.publish" /.husk/.cob)
+
+PREP="" && case $WHICH_PREP in
+  "build")
+    PREP=$(echo -n "${BUILD_PREP}") ;;
+  "test")
+    PREP=$(echo -n "${BUILD_PREP} ${TEST_PREP}") ;;
+  "publish")
+    PREP=$(echo -n "${BUILD_PREP} ${TEST_PREP} ${PUBLISH_PREP}") ;;
+  *)
+    echo "invalid PREP" && exit 1 ;;
+esac
+sudo dnf install -y ${PREP}
+
+PAYLOAD=$(jq -r ".${WHICH_SEED}.source" /.husk/.cob)
+/.husk/seed $(jq -r ".${WHICH_SEED}.url" /.husk/.cob) $(jq -r ".${WHICH_SEED}.checksum" /.husk/.cob) ${TEMP} ${PAYLOAD}
+RECIPE=$(jq ".${WHICH_SEED}.recipe.${WHICH_RECIPE}" /.husk/.cob)
+
+cd "${TEMP}${PAYLOAD}"
+STEPS=$(echo "${RECIPE}" | jq -r 'length')
+INDEX=-1; while (( INDEX++ < $STEPS-1 )); do 
+  eval $(echo "${RECIPE}" | jq -r ".[$INDEX]");
+done
+

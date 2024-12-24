@@ -1,0 +1,24 @@
+https://github.com/strongswan/strongswan/blob/refs/heads/ml-dsa/testing/tests/ikev2/rw-cert-ppk/description.txt
+https://github.com/strongswan/strongswan/blob/refs/heads/ml-dsa/testing/tests/ikev2/net2net-cert/description.txt
+https://github.com/strongswan/strongswan/blob/refs/heads/ml-dsa/testing/tests/ipv6/net2net-ikev2/description.txt
+https://github.com/strongswan/strongswan/blob/refs/heads/ml-dsa/testing/tests/wolfssl/rw-mlkem/description.txt
+https://github.com/strongswan/strongswan/blob/refs/heads/ml-dsa/testing/tests/ikev2/rw-mlkem/description.txt
+
+
+
+https://github.com/randombit/botan
+https://github.com/randombit/botan-rs
+
+https://github.com/strongswan/strongswan/tree/refs/heads/ml-dsa/testing/tests/botan
+
+
+Integration tests
+
+* cert based authentication
+https://github.com/strongswan/strongswan/blob/refs/heads/ml-dsa/testing/tests/botan/rw-cert/description.txt
+
+
+* key exchange, modify to ML-KEM and BIKE
+https://github.com/strongswan/strongswan/blob/refs/heads/ml-dsa/testing/tests/botan/rw-mlkem/description.txt
+
+le person - https://keybase.io/jacklloyd

@@ -1,0 +1,8 @@
+#!/bin/bash
+# Author: Shree Raj Shrestha
+# Date: 12/31/2024
+set -ueox pipefail
+
+sudo dnf install -y semanage dnf-plugins-core python python-devel podman
+wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && rm -rf get-pip.py
+python -m venv "${HOME}/.husk/.venv" && mkdir -p "${HOME}/.husk/.harvest"

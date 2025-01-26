@@ -1,0 +1,7 @@
+STEPS=(
+    "./autogen.sh" \
+    "./configure \
+        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}" 
+    "make -j12 all"
+    "make install"
+)

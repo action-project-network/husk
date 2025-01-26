@@ -1,0 +1,16 @@
+STEPS=(
+    "libtoolize --automake"
+    "aclocal"
+    "autoheader"
+    "automake --add-missing --gnu --force-missing"
+    "autoconf"
+    "./autogen.sh"
+    "./configure \
+        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
+        --enable-shared"
+    "make -j12"
+    "make check"
+    "make install"
+    "make installcheck"
+)
+NEEDS=(zlib_latest_serial)

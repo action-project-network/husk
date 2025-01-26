@@ -1,0 +1,9 @@
+STEPS=(
+    "./configure \
+        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
+        --enable-shared"
+    "make -j12"
+    "make check"
+    "make installcheck"
+    "make install"
+)

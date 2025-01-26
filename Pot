@@ -1,6 +1,0 @@
-FROM soil
-ADD .cob /.husk/.cob
-RUN if [[ -f ".bob" ]] ; then ADD .bob /.husk/.bob ; fi
-ADD seed /.husk/seed
-ADD sprout /.husk/sprout
-CMD ["/bin/bash", "-c", "/.husk/sprout ${WHICH_SEED} ${WHICH_RECIPE} ${WHICH_SCOPE}"]

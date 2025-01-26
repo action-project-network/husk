@@ -1,0 +1,12 @@
+STEPS=(
+    "./configure \
+        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
+        --with-zlib=${SOIL_HOME}/${WHICH_COB}/zlib/include,${SOIL_HOME}/${WHICH_COB}/zlib/lib \
+        --enable-shared \
+        --enable-build-mode=production"
+    "make -j12"
+    "make check"
+    "make install"
+    "make check-install"
+)
+NEEDS=(zlib_latest_serial)

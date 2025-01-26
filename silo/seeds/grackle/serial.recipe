@@ -1,0 +1,4 @@
+STEPS=(
+    "touch ./src/clib/Make.mach.fedora"
+    "cd ./src/clib/ && ls -la | grep fedora"
+)

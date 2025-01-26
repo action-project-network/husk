@@ -1,0 +1,7 @@
+WHICH_POD="${1}"
+HUSK_HOME="${PWD}"
+SOIL_HOME="/soil"
+REQUIREMENTS="sh tar unzip"
+COB_PATH="${WHICH_POD/.//}"
+WHICH_COB=".${COB_PATH}"
+WIP="${HOME}/wip/${RANDOM}"

@@ -1,0 +1,4 @@
+DEPENDENCIES=(gcc cmake)
+URL="github.com/grackle-project/grackle/archive/refs/tags/grackle-3.3.0.tar.gz"
+CHECKSUM="15f287f97a7d113243b3ed4f6a90cdd5f22f858fdd339731019e4404df7bd418"
+SOURCE="grackle-grackle-3.3.0"

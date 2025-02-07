@@ -9,5 +9,5 @@ podman container rm --force "${WHICH_POD}"
 if [[ $WHICH_POD =~ ^husk.wip ]]; then
     podman run --name "${WHICH_POD}" -e COB_PATH="${COB_PATH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -it "soil.${WHICH_POD}"  "/bin/bash"
 else
-    podman run -d --name "${WHICH_POD}" -e COB_PATH="${COB_PATH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "soil.${WHICH_POD}" "${SOIL_HOME}/unshell" "${COB_PATH}"
+    podman run -d --name "${WHICH_POD}" -e COB_PATH="${COB_PATH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "soil.${WHICH_POD}" "${SOIL_HOME}/unshell" "${1}"
 fi

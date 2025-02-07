@@ -1,0 +1,4 @@
+DEPENDENCIES=(gcc diff)
+URL="github.com/HEASARC/cfitsio/archive/refs/tags/cfitsio4_5_0_20240826.tar.gz"
+CHECKSUM="8e95d162699627e6190d91fed140e624175061a5751bfef4dd17f79f8f515aee"
+SOURCE="cfitsio-cfitsio4_5_0_20240826"

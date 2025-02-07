@@ -74,3 +74,11 @@ Should the pod exit prematurely for whatever reason, simply revive the pod and e
 ### Continuation
 1. Archives are cached per checksum
 2. If a seed is installed to the cob using the *./sprout* script successfully, and then a following seed fails, rerunning *./harvest* resumes from the failed seed
+
+## Adding seeds
+TODO
+tldr
+add seed folder in silo/seeds/<newseed>/, populate <version>.seed and <method>.recipe
+add a wip.cob file in cobs/seedling folder
+run ./gather seedling.wip && ./spin seedling.wip && ./harvest seedling.wip
+inside the container, run ./sprout seeding.seed <newseed>_<version>_<method>

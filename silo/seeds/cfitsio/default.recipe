@@ -1,0 +1,11 @@
+STEPS=(
+    " CPPFLAGS=-I${SOIL_HOME}/${WHICH_COB}/zlib/include LDFLAGS=-L${SOIL_HOME}/${WHICH_COB}/zlib/lib ./configure \
+        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
+    "make -j12"
+    "make testprog"
+    "./testprog > testprog.lis"
+    "if ! diff -q testprog.lis testprog.out &>/dev/null; then >&2 exit 1; fi"
+    "if ! cmp testprog.fit testprog.std &>/dev/null; then >&2 exit 1; fi"
+    "make install"
+)
+NEEDS=(zlib_latest_serial)

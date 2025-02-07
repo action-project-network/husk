@@ -1,0 +1,4 @@
+DEPENDENCIES=()
+URL="github.com/ntessore/healpix/archive/refs/tags/v2024.2.tar.gz"
+CHECKSUM="227523e40d99241a4aa30115c9a16adc69448e4586cd16f410bcf7dacef85066"
+SOURCE="healpix-2024.2"

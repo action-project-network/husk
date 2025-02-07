@@ -6,4 +6,8 @@ source ./rake "${1}"
 rm -rf "${HUSK_HOME}/wip"
 podman container stop "${WHICH_POD}" && true
 podman container rm --force "${WHICH_POD}"
-podman run -d --name "${WHICH_POD}" -e COB_PATH="${COB_PATH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "soil.${WHICH_POD}"  "${SOIL_HOME}/unshell" "${COB_PATH}"
+if [[ $WHICH_POD =~ ^seedling ]]; then
+    podman run --name "${WHICH_POD}" -e COB_PATH="${COB_PATH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -it "soil.${WHICH_POD}"  "/bin/bash"
+else
+    podman run -d --name "${WHICH_POD}" -e COB_PATH="${COB_PATH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "soil.${WHICH_POD}" "${SOIL_HOME}/unshell" "${COB_PATH}"
+fi

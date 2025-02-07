@@ -1,0 +1,5 @@
+STEPS=(
+    "mkdir -p ${SOIL_HOME}/${WHICH_COB}/healpix"
+    "cp -R * ${SOIL_HOME}/${WHICH_COB}/healpix"
+)
+NEEDS=(cfitsio_latest_serial)

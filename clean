@@ -1,0 +1,6 @@
+#!/bin/sh
+# Author: Shree Raj Shrestha
+# Date: 02/06/2025
+set -ueox pipefail
+podman container rm --force $(podman container ls --filter "status=exited" --format='{{.Names}}' | grep "husk") && true
+podman image rm --force $(podman image ls --format='{{.Repository}}' | grep -e "soil" -e "husk") && true

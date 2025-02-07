@@ -1,4 +1,15 @@
 STEPS=(
+    "exit 1"
     "touch ./src/clib/Make.mach.fedora"
-    "cd ./src/clib/ && ls -la | grep fedora"
+    "echo 'MACH_FILE = Make.mach.fedora' >> ./src/clib/Make.mach.fedora"
+    "echo 'MACH_LIBTOOL = /usr/bin/libtool' >> ./src/clib/Make.mach.fedora"
+    "echo 'LOCAL_FC_INSTALL = /usr/bin/gfortran' >> ./src/clib/Make.mach.fedora"
+    "echo 'LOCAL_HDF5_INSTALL = ${SOIL_HOME}/${WHICH_COB}/hdf5' >> ./src/clib/Make.mach.fedora"
+    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}' >> ./src/clib/Make.mach.fedora"
+    "echo 'LOCAL_HDF5_INSTALL = ${SOIL_HOME}/${WHICH_COB}/hdf5' >> ./src/clib/Make.mach.fedora"
+    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}' >> ./src/clib/Make.mach.fedora"
+    "./configure"
+    "cat ./src/clib/Make.mach.fedora"
+    "cd ./src/clib && make machine-fedora"
+    "make"
 )

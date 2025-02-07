@@ -1,5 +1,5 @@
 STEPS=(
-    " CPPFLAGS=-I${SOIL_HOME}/${WHICH_COB}/zlib/include LDFLAGS=-L${SOIL_HOME}/${WHICH_COB}/zlib/lib ./configure \
+    "CPPFLAGS=-I${SOIL_HOME}/${WHICH_COB}/zlib/include LDFLAGS=-L${SOIL_HOME}/${WHICH_COB}/zlib/lib ./configure \
         --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
     "make -j12"
     "make testprog"

@@ -2,7 +2,7 @@ STEPS=(
     "CPPFLAGS=-I${SOIL_HOME}/${WHICH_COB}/cfitsio/include LDFLAGS=-L${SOIL_HOME}/${WHICH_COB}/cfitsio/lib ./configure --auto=all"
     "make -j12"
     "make test"
-    "mkdir -p ${SOIL_HOME}/${WHICH_COB}/healpix"
-    "cp -R * ${SOIL_HOME}/${WHICH_COB}/healpix"
+    "mkdir -p ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
+    "cp -R * ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
 )
 NEEDS=(cfitsio_latest_default)

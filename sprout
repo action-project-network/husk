@@ -1,7 +1,6 @@
 #!/bin/sh
 # Author: Shree Raj Shrestha
 # Date: 01/20/2025
-# usage - ./sprout swiftsim.serial swiftsim_latest_serial
 set -ueox pipefail
 source /soil/rake "${1}"
 mkdir -p "${WIP}"
@@ -16,6 +15,8 @@ case $(echo "${ARCHIVE##*.}") in
         tar -xvzf "${ARCHIVE}" -C "${WIP}";;
     "zip")
         unzip "${ARCHIVE}" -d "${WIP}";;
+    "git")
+        tar -xvzf "${ARCHIVE}" -C "${WIP}";;
     *)
         exit 1 ;;
 esac

@@ -1,0 +1,2 @@
+COB=(zlib_latest_default hdf5_latest_default fftw_latest_default gklib_latest_default metis_latest_default gsl_latest_default numa_latest_default jemalloc_latest_default grackle_latest_default swiftsim_latest_default)
+REQUIREMENTS="sh tar unzip gcc g++ autoconf automake @development-tools cmake libtool gcc-gfortran"

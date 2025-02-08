@@ -4,3 +4,8 @@
 set -ueox pipefail
 podman container rm --force $(podman container ls --filter "status=exited" --format='{{.Names}}' | grep "husk") && true
 podman image rm --force $(podman image ls --format='{{.Repository}}' | grep -e "soil" -e "husk") && true
+find . -name "*.tar.bz2" -type f -delete
+find . -name "*.tar.gz" -type f -delete
+find . -name "*.zip" -type f -delete
+find . -name "*.git" -type f -delete
+rm -rf ./.husk

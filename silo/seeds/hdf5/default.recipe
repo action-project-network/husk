@@ -9,4 +9,4 @@ STEPS=(
     "make install"
     "make check-install"
 )
-NEEDS=(zlib_latest_serial)
+NEEDS=(zlib_latest_default)

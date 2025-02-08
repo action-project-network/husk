@@ -1,0 +1,15 @@
+STEPS=(
+    "git config --global --add safe.directory ${WIP}/${WHICH_SEED}"
+    "git submodule update --init"
+    "cmake \
+        -DCMAKE_INSTALL_PREFIX=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
+        -DBUILD_SHARED_LIBS=ON \
+        -DHDF5_ROOT=${SOIL_HOME}/${WHICH_COB}/hdf5 \
+        -DHDF5_PREFER_PARALLEL=true \
+        -B ./build"
+    "cmake --build ./build"
+    "cmake --install ./build"
+)
+NEEDS=(
+    hdf5_latest_parallel
+)

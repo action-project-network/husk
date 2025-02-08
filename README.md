@@ -9,6 +9,8 @@ Why Podman?
 * Daemon-less
 * Root-less
 
+2. Git (optional)
+
 ## Adding seeds
 1. Create a new directory in the *silo* for the *seed*
 ```shell
@@ -43,23 +45,23 @@ The *./rake* script takes this canonical name and translates this to other varia
 ```
 Example:
 ```bash
-./gather swiftsim.serial
-./spin swiftsim.serial
-./harvest swiftsim.serial
-./peek swiftsim.serial
+./gather swiftsim.default
+./spin swiftsim.default
+./harvest swiftsim.default
+./peek swiftsim.default
 ```
 
 ### Dependency Resolution
-Per the example, we need *silo/cobs/swiftsim/serial.cob* populated with the seeds. Provided that the needs of the seeds are completely specified, this step is automated by the *./gather* script by simply specifiying the meta-seed.
+Per the example, we need *silo/cobs/swiftsim/default.cob* populated with the seeds. Provided that the needs of the seeds are completely specified, this step is automated by the *./gather* script by simply specifiying the meta-seed.
 
-For example, if the contents of *silo/cobs/swiftsim/serial.cob* is:
+For example, if the contents of *silo/cobs/swiftsim/default.cob* is:
 ```bash
-COB=(swiftsim_latest_serial)
+COB=(swiftsim_latest_default)
 ```
-Executing *./gather swiftsim.serial*, yields
+Executing *./gather swiftsim.default*, yields
 
 ```bash
-COB=(zlib_latest_serial hdf5_latest_serial openmpi_latest_serial fftw_latest_serial gklib_latest_serial metis_latest_serial gsl_latest_serial numa_latest_serial jemalloc_latest_serial swiftsim_latest_serial)
+COB=(zlib_latest_default hdf5_latest_default openmpi_latest_default fftw_latest_default gklib_latest_default metis_latest_default gsl_latest_default numa_latest_default jemalloc_latest_default swiftsim_latest_default)
 REQUIREMENTS="sh tar unzip gcc g++ autoconf automake @development-tools libtool cmake"
 ```
 The requirements in this case are the packages required to build the package. The order of the build is also important, and the *./gather* script resolves this for us in order of precedence.
@@ -67,8 +69,8 @@ The requirements in this case are the packages required to build the package. Th
 ## Debugging
 Should the pod exit prematurely for whatever reason, simply revive the pod and enter it's shell and debug away.
 ```bash
-./revive swiftsim.serial
-./enter swiftsim.serial
+./revive swiftsim.default
+./enter swiftsim.default
 ```
 
 ### Continuation

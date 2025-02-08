@@ -1,0 +1,23 @@
+STEPS=(
+    "./autogen.sh"
+    "./configure \
+        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
+        --with-hdf5=${SOIL_HOME}/${WHICH_COB}/hdf5/bin/h5cc \
+        --with-fftw=${SOIL_HOME}/${WHICH_COB}/fftw \
+        --with-metis=${SOIL_HOME}/${WHICH_COB}/metis \
+        --with-gsl=${SOIL_HOME}/${WHICH_COB}/gsl \
+        --with-numa=${SOIL_HOME}/${WHICH_COB}/numa \
+        --with-jemalloc=${SOIL_HOME}/${WHICH_COB}/jemalloc \
+        --with-grackle=${SOIL_HOME}/${WHICH_COB}/grackle"
+    "make -j12 all"
+    "make install"
+)
+NEEDS=(
+    hdf5_latest_default \
+    fftw_latest_default \
+    metis_latest_default \
+    gsl_latest_default \
+    numa_latest_default \
+    jemalloc_latest_default \
+    grackle_latest_default
+)

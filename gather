@@ -21,12 +21,25 @@ function getSeed() {
     ARCHIVE=$(echo "${URL##*/}")
     if [ -e "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}" ] \
         && $(echo "${CHECKSUM} $(echo "${URL##*/}")" | sha256sum --check --status); then
-
         echo "Seed is already cached, skipping download"
     else
-        curl -LO "https://${URL}"
-        echo "${CHECKSUM} $(echo "${URL##*/}")" | sha256sum --check --status
+        if [[ $URL =~ .*.git$ ]]; then
+            REPO_BASE=$(basename "${URL}")
+            REPO="${REPO_BASE%.*}"
+            rm -rf "${REPO}" && git clone --depth=1 "https://${URL}"
+            cd "${REPO}" && git reset --hard "${COMMIT}" && cd ..
+            tar czf "${REPO}.git" "${REPO}" && rm -rf "${REPO}"
+            sed -i '/CHECKSUM/d' "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 2).seed"
+            printf "\nCHECKSUM=$(sha256sum "${REPO_BASE}" | cut -d " " -f 1)" >> \
+                "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 2).seed"
+            sed -i '/^[[:space:]]*$/d' \
+                "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 2).seed"
+        else
+            curl -LO "https://${URL}"
+            echo "${CHECKSUM} $(echo "${URL##*/}")" | sha256sum --check --status
+        fi
     fi
+
     cd "${HUSK_HOME}"
     for DEPENDENCY in "${DEPENDENCIES[@]}"
     do

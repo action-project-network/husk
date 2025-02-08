@@ -1,4 +1,0 @@
-STEPS=(
-    "mkdir -p ${SOIL_HOME}/${WHICH_COB}/gklib"
-    "cp -R * ${SOIL_HOME}/${WHICH_COB}/gklib"
-)

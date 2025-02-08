@@ -1,0 +1,18 @@
+STEPS=(
+    "git config --global --add safe.directory ${WIP}/${WHICH_SEED}"
+    "git submodule update --init"
+    "./configure"
+    "cd ./src/clib"
+    "cp Make.mach.linux-gnu Make.mach.fedora"
+    "echo 'MACH_INCLUDES = -I${SOIL_HOME}/${WHICH_COB}/hdf5/include' >> Make.mach.fedora"
+    "echo 'MACH_LIBS = -L${SOIL_HOME}/${WHICH_COB}/hdf5/lib -lgfortran' >> Make.mach.fedora"
+    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}' >> Make.mach.fedora"
+    "make clean"
+    "make machine-fedora"
+    "make"
+    "mkdir -p ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
+    "make install"
+)
+NEEDS=(
+    hdf5_latest_default
+)

@@ -8,4 +8,4 @@ STEPS=(
     "if ! cmp testprog.fit testprog.std &>/dev/null; then >&2 exit 1; fi"
     "make install"
 )
-NEEDS=(zlib_latest_serial)
+NEEDS=(zlib_latest_default)

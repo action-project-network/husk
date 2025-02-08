@@ -1,6 +1,6 @@
 STEPS=(
     "rm -rf GKlib"
-    "ln -s /soil/.swiftsim/serial/gklib ./GKlib"
+    "ln -s ${SOIL_HOME}/${WHICH_COB}/gklib ./GKlib"
     "make config \
         shared=1 \
         cc=gcc \
@@ -8,4 +8,4 @@ STEPS=(
     "make all"
     "make install"
 )
-NEEDS=(gklib_latest_serial)
+NEEDS=(gklib_latest_default)

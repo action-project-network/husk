@@ -1,4 +1,0 @@
-DEPENDENCIES=(gcc autoconf automake libtool)
-URL="github.com/numactl/numactl/archive/refs/heads/master.zip"
-CHECKSUM="4557a45db86ddeaf25da39fd14123c6fef490f33c0613f5ee390727898d9db1d"
-SOURCE="numactl-master"

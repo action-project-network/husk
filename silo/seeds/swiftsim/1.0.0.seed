@@ -1,0 +1,4 @@
+DEPENDENCIES=(gcc autoconf automake libtool)
+URL="https://github.com/SWIFTSIM/SWIFT/archive/refs/tags/v1.0.0.tar.gz"
+CHECKSUM="d02c6d5616bae01725494c91ce25a37b18c6d6abb25b63b8e89e0a1f9b32ecca"
+SOURCE="SWIFT-1.0.0"

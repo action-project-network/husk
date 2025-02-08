@@ -2,24 +2,25 @@ STEPS=(
     "./autogen.sh"
     "./configure \
         --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
-        --enable-mpi \
         --with-hdf5=${SOIL_HOME}/${WHICH_COB}/hdf5/bin/h5cc \
         --with-fftw=${SOIL_HOME}/${WHICH_COB}/fftw \
         --with-metis=${SOIL_HOME}/${WHICH_COB}/metis \
         --with-gsl=${SOIL_HOME}/${WHICH_COB}/gsl \
         --with-numa=${SOIL_HOME}/${WHICH_COB}/numa \
         --with-jemalloc=${SOIL_HOME}/${WHICH_COB}/jemalloc \
-        --with-grackle=${SOIL_HOME}/${WHICH_COB}/grackle"
+        --with-chealpix=${SOIL_HOME}/${WHICH_COB}/healpix \
+        --with-cfitsio=${SOIL_HOME}/${WHICH_COB}/cfitsio"
     "make -j12 all"
     "make install"
 )
 NEEDS=(
-    openmpi_latest_default \
-    hdf5_latest_default \
-    fftw_latest_mpi \
-    metis_latest_mpi \
-    gsl_latest_mpi \
-    numa_latest_default \
-    jemalloc_latest_default \
-    grackle_latest_mpi
+    hdf5_1.14.5_standalone \
+    fftw_3.3.10_standalone \
+    metis_5.1.1_default \
+    gsl_2.8_default \
+    numa_2.0.19_default \
+    jemalloc_5.3.0_default \
+    # grackle_latest_default \
+    healpix_3.83_default \
+    cfitsio_4.5.0_default
 )

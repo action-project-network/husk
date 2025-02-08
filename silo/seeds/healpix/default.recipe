@@ -5,4 +5,4 @@ STEPS=(
     "mkdir -p ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
     "cp -R * ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
 )
-NEEDS=(cfitsio_latest_default)
+NEEDS=(cfitsio_4.5.0_default)

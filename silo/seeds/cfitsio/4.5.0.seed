@@ -1,0 +1,4 @@
+DEPENDENCIES=(gcc diff)
+URL="https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.5.0.tar.gz"
+CHECKSUM="e4854fc3365c1462e493aa586bfaa2f3d0bb8c20b75a524955db64c27427ce09"
+SOURCE="cfitsio-4.5.0"

@@ -1,4 +1,0 @@
-DEPENDENCIES=(gcc autoconf automake libtool)
-URL="github.com/SWIFTSIM/SWIFT/archive/refs/heads/master.zip"
-CHECKSUM="b250a3f6c9489f2f885cbeb626d7586b076e7c65e92d042ea35745499788a4b2"
-SOURCE="SWIFT-master"

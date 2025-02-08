@@ -11,5 +11,5 @@ STEPS=(
     "cmake --install ./build"
 )
 NEEDS=(
-    hdf5_latest_parallel
+    hdf5_1.14.5_parallel
 )

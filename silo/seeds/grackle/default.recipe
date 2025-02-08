@@ -14,5 +14,5 @@ STEPS=(
     "make install"
 )
 NEEDS=(
-    hdf5_latest_default
+    hdf5_1.14.5_standalone
 )

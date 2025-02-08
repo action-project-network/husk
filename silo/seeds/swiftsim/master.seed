@@ -1,0 +1,4 @@
+DEPENDENCIES=(gcc autoconf automake libtool)
+URL="https://github.com/SWIFTSIM/SWIFT.git"
+COMMIT="d6352773bd5f37276d790626af06c688ecaecdb6"
+SOURCE="SWIFT"

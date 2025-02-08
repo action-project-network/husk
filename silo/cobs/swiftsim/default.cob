@@ -1,1 +1,0 @@
-COB=(swiftsim_1.0.0_standalone)

@@ -1,5 +1,10 @@
 # HUSK
-The **build as you go**, build system. Inspired by countless painful local builds
+*A framework serving as a support*
+
+https://ahdictionary.com/word/search.html?q=husk
+
+* to build **reproducable**, **modular**, **reusable**, and **composable** scientific softwares
+
 
 ## Pre-Requisite
 
@@ -9,7 +14,7 @@ Why Podman?
 * Daemon-less
 * Root-less
 
-2. Git (optional)
+2. Git (if using seeds that reqiure *git clone*)
 
 ## Adding seeds
 1. Create a new directory in the *silo* for the *seed*

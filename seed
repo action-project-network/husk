@@ -7,34 +7,46 @@ URL=$2
 VERSION=$3
 
 HUSK_HOME="${PWD}"
-WIP="./.seed"
+NEW_SEED="${HUSK_HOME}/silo/seeds/${SEED}"
+mkdir -p "${NEW_SEED}"
+
+NEW_SEED_VERSION="${NEW_SEED}/${VERSION}.seed"
+rm -rf "${NEW_SEED_VERSION}"
+touch "${NEW_SEED_VERSION}"
+
+WIP="${HUSK_HOME}/.seed"
 mkdir -p "${WIP}"
 cd "${WIP}"
 
-curl -sLO "${URL}"
-ARCHIVE=$(basename "${URL}")
-case $(echo "${ARCHIVE##*.}") in
-    "bz2")
-        tar -xf "${ARCHIVE}";;
-    "gz")
-        tar -xzf "${ARCHIVE}";;
-    "zip")
-        unzip "${ARCHIVE}";;
-    "git")
-        tar -xzf "${ARCHIVE}";;
-    *)
-        exit 1 ;;
-esac
-CHECKSUM=$(sha256sum "${ARCHIVE}" | cut -d " " -f 1)
-SOURCE=$(echo $(find ./ -maxdepth 1 -type d -printf "%f~" | cut -d "~" -f 2))
+SOURCE=""
+CHECKSUM=""
+if [[ $URL =~ .*.git$ ]]; then
+    git clone "${URL}"
+    SOURCE=$(echo $(find ./ -maxdepth 1 -type d -printf "%f~" | cut -d "~" -f 2))
+    cd "${SOURCE}"
+    COMMIT=$(git rev-parse HEAD)
+    printf "DEPENDENCIES=()\nURL=\"${URL}\"\nCOMMIT=\"${COMMIT}\"\nSOURCE=\"${SOURCE}\"" >> "${NEW_SEED_VERSION}"
+else
+    curl -sLO "${URL}"
+    ARCHIVE=$(basename "${URL}")
+    case $(echo "${ARCHIVE##*.}") in
+        "bz2")
+            tar -xf "${ARCHIVE}";;
+        "gz")
+            tar -xzf "${ARCHIVE}";;
+        "zip")
+            unzip "${ARCHIVE}";;
+        "git")
+            tar -xzf "${ARCHIVE}";;
+        *)
+            exit 1 ;;
+    esac
+    CHECKSUM=$(sha256sum "${ARCHIVE}" | cut -d " " -f 1)
+    SOURCE=$(echo $(find ./ -maxdepth 1 -type d -printf "%f~" | cut -d "~" -f 2))
+    printf "DEPENDENCIES=()\nURL=\"${URL}\"\nCHECKSUM=\"${CHECKSUM}\"\nSOURCE=\"${SOURCE}\"\n" >> "${NEW_SEED_VERSION}"
+fi
 
 cd "${HUSK_HOME}"
 rm -rf .seed
 
-NEW_SEED="${HUSK_HOME}/silo/seeds/${SEED}"
-mkdir -p "${NEW_SEED}"
-NEW_SEED_VERSION="${NEW_SEED}/${VERSION}.seed"
-rm -rf "${NEW_SEED_VERSION}"
-touch "${NEW_SEED_VERSION}"
-printf "DEPENDENCIES=()\nURL=\"${URL}\"\nCHECKSUM=\"${CHECKSUM}\"\nSOURCE=\"${SOURCE}\"\n" >> "${NEW_SEED_VERSION}"
 

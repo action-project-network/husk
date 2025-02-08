@@ -1,0 +1,2 @@
+COB=(zlib_1.3.1_default hdf5_1.14.5_standalone fftw_3.3.10_standalone gklib_5.1.1_default metis_5.1.1_default gsl_2.8_default numa_2.0.19_default jemalloc_5.3.0_default cfitsio_4.5.0_default healpix_3.83_default swiftsim_master_standalone)
+REQUIREMENTS="sh tar unzip gcc g++ autoconf automake @development-tools cmake libtool diff"

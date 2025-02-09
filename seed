@@ -7,6 +7,11 @@ URL=$2
 VERSION=$3
 
 HUSK_HOME="${PWD}"
+EPHEMERAL="${HUSK_HOME}/.seed"
+rm -rf "${EPHEMERAL}"
+mkdir -p "${EPHEMERAL}"
+cd "${EPHEMERAL}"
+
 NEW_SEED="${HUSK_HOME}/silo/seeds/${SEED}"
 mkdir -p "${NEW_SEED}"
 
@@ -14,14 +19,10 @@ NEW_SEED_VERSION="${NEW_SEED}/${VERSION}.seed"
 rm -rf "${NEW_SEED_VERSION}"
 touch "${NEW_SEED_VERSION}"
 
-NURSERY="${HUSK_HOME}/.seed"
-mkdir -p "${NURSERY}"
-cd "${NURSERY}"
-
 SOURCE=""
 CHECKSUM=""
 if [[ $URL =~ .*.git$ ]]; then
-    git clone "${URL}"
+    git clone "${URL}" --depth=1
     SOURCE=$(echo $(find ./ -maxdepth 1 -type d -printf "%f~" | cut -d "~" -f 2))
     cd "${SOURCE}"
     COMMIT=$(git rev-parse HEAD)
@@ -45,8 +46,6 @@ else
     SOURCE=$(echo $(find ./ -maxdepth 1 -type d -printf "%f~" | cut -d "~" -f 2))
     printf "DEPENDENCIES=()\nURL=\"${URL}\"\nCHECKSUM=\"${CHECKSUM}\"\nSOURCE=\"${SOURCE}\"\n" >> "${NEW_SEED_VERSION}"
 fi
-
-cd "${HUSK_HOME}"
-rm -rf .seed
+rm -rf "${EPHEMERAL}"
 
 

@@ -1,0 +1,25 @@
+#!/bin/sh
+# Author: Shree Raj Shrestha
+# Date: 01/28/2025
+set -ueox pipefail
+
+HUSK_HOME="$(pwd)"
+FARM="${HUSK_HOME}/.farm"
+mkdir -p "${FARM}"
+cd "${FARM}"
+
+rm -rf "${FARM}/SWIFT"
+git clone --depth=1 https://github.com/SWIFTSIM/SWIFT.git "${FARM}/SWIFT"
+
+SIM="SWIFT/examples/SmallCosmoVolume/SmallCosmoVolume_DM"
+KEY=${SIM////.}
+mkdir -p "${KEY}"
+cd "${KEY}"
+eval "${FARM}/${SIM}/getIC.sh"
+
+LD_LIBRARY_PATH="${HUSK_HOME}/.husk/swiftsim/standalone/cfitsio/lib" \
+    "${HUSK_HOME}/.husk/swiftsim/standalone/swiftsim/bin/swift" \
+    --cosmology \
+    --self-gravity \
+    --threads=16 \
+    "${FARM}/${SIM}/small_cosmo_volume_dm.yml"

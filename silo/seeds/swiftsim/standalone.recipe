@@ -8,8 +8,9 @@ STEPS=(
         --with-gsl=${SOIL_HOME}/${WHICH_COB}/gsl \
         --with-numa=${SOIL_HOME}/${WHICH_COB}/numa \
         --with-jemalloc=${SOIL_HOME}/${WHICH_COB}/jemalloc \
-        --with-chealpix=${SOIL_HOME}/${WHICH_COB}/healpix \
-        --with-cfitsio=${SOIL_HOME}/${WHICH_COB}/cfitsio"
+        --with-chealpix=/${SOIL_HOME}/${WHICH_COB}/healpix \
+        --with-cfitsio=${SOIL_HOME}/${WHICH_COB}/cfitsio \
+        --enable-lightcone" # needed to link healpix
     "make -j12 all"
     "make install"
 )

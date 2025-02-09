@@ -1,5 +1,5 @@
 STEPS=(
-    "CPPFLAGS=-I${SOIL_HOME}/${WHICH_COB}/zlib/include LDFLAGS=-L${SOIL_HOME}/${WHICH_COB}/zlib/lib ./configure \
+    "./configure \
         --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
     "make -j12"
     "make testprog"
@@ -8,4 +8,3 @@ STEPS=(
     "if ! cmp testprog.fit testprog.std &>/dev/null; then >&2 exit 1; fi"
     "make install"
 )
-NEEDS=(zlib_1.3.1_default)

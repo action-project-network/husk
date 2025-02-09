@@ -13,9 +13,21 @@ https://ahdictionary.com/word/search.html?q=husk
     * Why Podman?
         * Daemon-less
         * Root-less
+```
+dnf install podman
+```
 
 2. Git
     * if using seeds that reqiure *git clone*
+```
+dnf install git
+```
+
+3. Latex
+    * required to render some projections or plots
+```
+dnf install texlive-scheme-full
+```
 
 ## Adding seeds
 1. This creates the directory *./silo/seeds/\<name>* and adds a file *\<version>.seed*

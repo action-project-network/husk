@@ -23,3 +23,9 @@ LD_LIBRARY_PATH="${HUSK_HOME}/.husk/swiftsim/standalone/cfitsio/lib" \
     --self-gravity \
     --threads=16 \
     "${FARM}/${SIM}/small_cosmo_volume_dm.yml"
+python -m venv venv
+source ./venv/bin/activate
+pip install matplotlib swiftsimio scipy pylatex
+eval "python3 ${FARM}/${SIM}/plotProjection.py 31"
+deactivate
+cd "${HUSK_HOME}"

@@ -1,3 +1,4 @@
+#TODO - add grackle to standalone build, run light come example for small cosmo volume
 STEPS=(
     "git config --global --add safe.directory ${WIP}"
     "git submodule update --init"

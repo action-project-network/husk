@@ -2,7 +2,7 @@ STEPS=(
     "./autogen.sh"
     "./configure \
         --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
-        --with-hdf5=${SOIL_HOME}/${WHICH_COB}/hdf5/bin/h5cc
+        --with-hdf5=${SOIL_HOME}/${WHICH_COB}/hdf5/bin/h5cc \
         --with-fftw=${SOIL_HOME}/${WHICH_COB}/fftw \
         --with-metis=${SOIL_HOME}/${WHICH_COB}/metis \
         --with-gsl=${SOIL_HOME}/${WHICH_COB}/gsl \

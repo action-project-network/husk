@@ -10,82 +10,37 @@ https://ahdictionary.com/word/search.html?q=husk
 
 1. Install podman *https://podman.io/docs/installation* 
 
-Why Podman?
-* Daemon-less
-* Root-less
+    * Why Podman?
+        * Daemon-less
+        * Root-less
 
-2. Git (if using seeds that reqiure *git clone*)
+2. Git
+    * if using seeds that reqiure *git clone*
 
 ## Adding seeds
-1. Create a new directory in the *silo* for the *seed*
+1. This creates the directory *./silo/seeds/\<name>* and adds a file *\<version>.seed*
 ```shell
-./husk/silo/seeds/<WHICH_SEED>/
+./seed <name> <url> <version>
 ```
-2. Add a *<WHICH_VERSION>.seed* file in the format
-```json
-DEPENDENCIES=(gcc)
-URL="source-domain.name/archive.format"
+2. Add to the **DEPENDENCIES** of the new seed with what is required to make the seed recipe
+```
+DEPENDENCIES=()
+URL="https://some.package.archive"
 CHECKSUM="sha256sum"
-SOURCE="extracted-folder"
+SOURCE="root-of-extracted-archive"
 ```
 Some supported archive format are
 1. *.tar.bz2*
 2. *.tar.gz*
 3. *.zip*
 
-## Usage
+Git projects, i.e. git clone, are packaged as a *tar.gz* archive using the *.git* extension
 
-### What are Pods?
-**Pods** are the canonical terms that determines the name of the *Podman* container. A pod name usually contains the format *package.recipe*
-
-### What is rake?
-The *./rake* script takes this canonical name and translates this to other variables. The *.rake* script is used to initialize *husk* scripts.
-
-### Workflow
-```bash
-./gather <WHICH_POD>
-./spin <WHICH_POD>
-./harvest <WHICH_POD>
-./peek <WHICH_POD>
-```
+## Workflow
 Example:
 ```bash
-./gather swiftsim.default
-./spin swiftsim.default
-./harvest swiftsim.default
-./peek swiftsim.default
+./gather swiftsim.standalone
+./spin swiftsim.standalone
+./harvest swiftsim.standalone
+./peek swiftsim.standalone
 ```
-
-### Dependency Resolution
-Per the example, we need *silo/cobs/swiftsim/default.cob* populated with the seeds. Provided that the needs of the seeds are completely specified, this step is automated by the *./gather* script by simply specifiying the meta-seed.
-
-For example, if the contents of *silo/cobs/swiftsim/default.cob* is:
-```bash
-COB=(swiftsim_latest_default)
-```
-Executing *./gather swiftsim.default*, yields
-
-```bash
-COB=(zlib_latest_default hdf5_latest_default openmpi_latest_default fftw_latest_default gklib_latest_default metis_latest_default gsl_latest_default numa_latest_default jemalloc_latest_default swiftsim_latest_default)
-REQUIREMENTS="sh tar unzip gcc g++ autoconf automake @development-tools libtool cmake"
-```
-The requirements in this case are the packages required to build the package. The order of the build is also important, and the *./gather* script resolves this for us in order of precedence.
-
-## Debugging
-Should the pod exit prematurely for whatever reason, simply revive the pod and enter it's shell and debug away.
-```bash
-./revive swiftsim.default
-./enter swiftsim.default
-```
-
-### Continuation
-1. Archives are cached per checksum
-2. If a seed is installed to the cob using the *./sprout* script successfully, and then a following seed fails, rerunning *./harvest* resumes from the failed seed
-
-## Adding seeds
-TODO
-tldr
-add seed folder in silo/seeds/<newseed>/, populate <version>.seed and <method>.recipe
-add a wip.cob file in cobs/seedling folder
-run ./gather seedling.wip && ./spin seedling.wip && ./harvest seedling.wip
-inside the container, run ./sprout seeding.seed <newseed>_<version>_<method>

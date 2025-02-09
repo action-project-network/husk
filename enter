@@ -3,4 +3,4 @@
 # Date: 01/28/2025
 set -ueox pipefail
 source ./rake "${1}"
-podman exec -it "${WHICH_POD}" /bin/bash
+podman exec -it "${WHICH_SOIL}" "/bin/bash"

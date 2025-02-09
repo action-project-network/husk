@@ -1,16 +1,16 @@
 STEPS=(
     "./autogen.sh"
     "./configure \
-        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
-        --with-hdf5=${SOIL_HOME}/${WHICH_COB}/hdf5/bin/h5cc \
-        --with-fftw=${SOIL_HOME}/${WHICH_COB}/fftw \
-        --with-metis=${SOIL_HOME}/${WHICH_COB}/metis \
-        --with-gsl=${SOIL_HOME}/${WHICH_COB}/gsl \
-        --with-numa=${SOIL_HOME}/${WHICH_COB}/numa \
-        --with-jemalloc=${SOIL_HOME}/${WHICH_COB}/jemalloc \
-        --with-cfitsio=${SOIL_HOME}/${WHICH_COB}/cfitsio \
+        --prefix=${SOIL_HOME}/${WHICH_NURSERY}/${WHICH_SEED} \
+        --with-hdf5=${SOIL_HOME}/${WHICH_NURSERY}/hdf5/bin/h5cc \
+        --with-fftw=${SOIL_HOME}/${WHICH_NURSERY}/fftw \
+        --with-metis=${SOIL_HOME}/${WHICH_NURSERY}/metis \
+        --with-gsl=${SOIL_HOME}/${WHICH_NURSERY}/gsl \
+        --with-numa=${SOIL_HOME}/${WHICH_NURSERY}/numa \
+        --with-jemalloc=${SOIL_HOME}/${WHICH_NURSERY}/jemalloc \
+        --with-cfitsio=${SOIL_HOME}/${WHICH_NURSERY}/cfitsio \
         --enable-lightcone \
-        --with-chealpix=/${SOIL_HOME}/${WHICH_COB}/healpix"
+        --with-chealpix=/${SOIL_HOME}/${WHICH_NURSERY}/healpix"
     "make -j12 all"
     "make install"
 )

@@ -3,9 +3,14 @@
 # Date: 01/30/2025
 set -ueox pipefail
 source /soil/rake "${1}"
-source "${SOIL_HOME}/silo/cobs/${COB_PATH}.cob"
+
+if [[ ! $WHICH_SOIL =~ .*cob$ ]]; then
+    echo "can only gather seeds for cobs" && exit 1
+fi
+source "${SOIL_HOME}/silo/cobs/${RAKE_PATH///cob/}.cob"
+
 for SEED in "${COB[@]}"; do
-    if [ ! -d "${SOIL_HOME}/${WHICH_COB}/$(echo "${SEED}" | cut -d "_" -f 1)" ]; then
+    if [ ! -d "${SOIL_HOME}/${WHICH_NURSERY}/$(echo "${SEED}" | cut -d "_" -f 1)" ]; then
         "${SOIL_HOME}/sprout" "${1}" "${SEED}";
     fi
 done

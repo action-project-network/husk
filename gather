@@ -35,7 +35,10 @@ function getSeed() {
         fi
         if $ARCHIVE_SEED; then 
             rm -rf "${REPO}" && git clone --depth=1 "${URL}"
-            cd "${REPO}" && git reset --hard "${COMMIT}" && cd ..
+            cd "${REPO}"
+            git reset --hard "${COMMIT}"
+            git submodule update --init --recursive --depth 1
+            cd ..
             tar czf "${REPO}.git" "${REPO}" && rm -rf "${REPO}"
         fi
     else
@@ -54,8 +57,8 @@ function getSeed() {
         if [[ $DEPENDENCY =~ .*:.* ]]; then
             DEPENDENCY=$(echo "${DEPENDENCY}" |  cut -d ":" -f 1)
         fi
-        if [[ ! $REQUIREMENTS =~ "${DEPENDENCY}" ]]; then
-            REQUIREMENTS=$REQUIREMENTS" "$DEPENDENCY
+        if [[ ! $SOIL_REQUIREMENTS =~ "${DEPENDENCY}" ]]; then
+            SOIL_REQUIREMENTS=$SOIL_REQUIREMENTS" "$DEPENDENCY
         fi
     done
     if [[ ! ${COB_RESOLVED[@]} =~ ${1} ]]; then
@@ -63,7 +66,12 @@ function getSeed() {
     fi
 }
 
-THIS_COB="${HUSK_HOME}/silo/cobs/${COB_PATH}.cob"
+
+if [[ ! $WHICH_SOIL =~ .*cob$ ]]; then
+    echo "can only gather seeds for cobs" && exit 1
+fi
+
+THIS_COB="${HUSK_HOME}/silo/cobs/${RAKE_PATH///cob/}.cob"
 source "${THIS_COB}"
 COB_RESOLVED=()
 for SEED in "${COB[@]}"
@@ -71,7 +79,7 @@ do
     getSeed "${SEED}"
 done
 sed -i '/COB/d' "${THIS_COB}"
-sed -i '/REQUIREMENTS/d' "${THIS_COB}"
+sed -i '/SOIL_REQUIREMENTS/d' "${THIS_COB}"
 echo "COB=(${COB_RESOLVED[@]})" >> "${THIS_COB}"
-printf "\nREQUIREMENTS=\"${REQUIREMENTS}\"" >> "${THIS_COB}"
+printf "\nSOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS}\"" >> "${THIS_COB}"
 sed -i '/^[[:space:]]*$/d' "${THIS_COB}"

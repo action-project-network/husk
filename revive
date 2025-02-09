@@ -4,8 +4,8 @@
 set -ueox pipefail
 source ./rake "${1}"
 
-DEBUG_POD=$(podman container ps -a --filter "name=${WHICH_POD}" --format '{{.ID}}')
-podman commit "${DEBUG_POD}" "${WHICH_POD}"
-podman container stop "${WHICH_POD}" && true
-podman container rm --force "${WHICH_POD}"
-podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" /bin/bash
+DEBUG_POD=$(podman container ps -a --filter "name=${WHICH_SOIL}" --format '{{.ID}}')
+podman commit "${DEBUG_POD}" "${WHICH_SOIL}"
+podman container stop "${WHICH_SOIL}" && true
+podman container rm --force "${WHICH_SOIL}"
+podman run -d --name "${WHICH_SOIL}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_SOIL}" /bin/bash

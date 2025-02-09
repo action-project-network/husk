@@ -1,0 +1,11 @@
+#!/bin/sh
+# Author: Shree Raj Shrestha
+# Date: 02/09/2025
+set -ueox pipefail
+source ./rake "${1}"
+if [[ ! $WHICH_SOIL =~ .*cob$ ]]; then
+    echo "can only collect seeds from cobs" && exit 1
+fi
+./gather "${1}"
+./spin "${1}"
+./nursery "${1}"

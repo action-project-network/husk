@@ -14,9 +14,9 @@ NEW_SEED_VERSION="${NEW_SEED}/${VERSION}.seed"
 rm -rf "${NEW_SEED_VERSION}"
 touch "${NEW_SEED_VERSION}"
 
-WIP="${HUSK_HOME}/.seed"
-mkdir -p "${WIP}"
-cd "${WIP}"
+NURSERY="${HUSK_HOME}/.seed"
+mkdir -p "${NURSERY}"
+cd "${NURSERY}"
 
 SOURCE=""
 CHECKSUM=""

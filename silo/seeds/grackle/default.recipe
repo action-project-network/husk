@@ -1,17 +1,15 @@
 #TODO - add grackle to standalone build, run light come example for small cosmo volume
 STEPS=(
-    "git config --global --add safe.directory ${WIP}"
-    "git submodule update --init"
     "./configure"
     "cd ./src/clib"
     "cp Make.mach.linux-gnu Make.mach.fedora"
-    "echo 'MACH_INCLUDES = -I${SOIL_HOME}/${WHICH_COB}/include' >> Make.mach.fedora"
-    "echo 'MACH_LIBS = -L${SOIL_HOME}/${WHICH_COB}/lib -lgfortran' >> Make.mach.fedora"
-    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_COB}' >> Make.mach.fedora"
+    "echo 'MACH_INCLUDES = -I${SOIL_HOME}/${WHICH_NURSERY}/include' >> Make.mach.fedora"
+    "echo 'MACH_LIBS = -L${SOIL_HOME}/${WHICH_NURSERY}/lib -lgfortran' >> Make.mach.fedora"
+    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_NURSERY}' >> Make.mach.fedora"
     "make clean"
     "make machine-fedora"
     "make"
-    "mkdir -p ${SOIL_HOME}/${WHICH_COB}"
+    "mkdir -p ${SOIL_HOME}/${WHICH_NURSERY}"
     "make install"
 )
 NEEDS=(

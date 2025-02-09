@@ -5,9 +5,7 @@ STEPS=(
     "automake --add-missing --gnu --force-missing"
     "autoconf"
     "./autogen.sh"
-    "./configure \
-        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
-        --enable-shared"
+    "./configure --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} --enable-shared=no"
     "make -j12"
     "make check"
     "make install"

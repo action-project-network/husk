@@ -1,6 +1,5 @@
 STEPS=(
-    "./configure \
-        --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}" 
+    "./configure --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} --enable-shared=no " 
     "make -j12 all"
     "make install"
 )

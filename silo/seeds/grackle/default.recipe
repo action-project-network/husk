@@ -1,16 +1,16 @@
 STEPS=(
-    "git config --global --add safe.directory ${WIP}/${WHICH_SEED}"
+    "git config --global --add safe.directory ${WIP}"
     "git submodule update --init"
     "./configure"
     "cd ./src/clib"
     "cp Make.mach.linux-gnu Make.mach.fedora"
-    "echo 'MACH_INCLUDES = -I${SOIL_HOME}/${WHICH_COB}/hdf5/include' >> Make.mach.fedora"
-    "echo 'MACH_LIBS = -L${SOIL_HOME}/${WHICH_COB}/hdf5/lib -lgfortran' >> Make.mach.fedora"
-    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}' >> Make.mach.fedora"
+    "echo 'MACH_INCLUDES = -I${SOIL_HOME}/${WHICH_COB}/include' >> Make.mach.fedora"
+    "echo 'MACH_LIBS = -L${SOIL_HOME}/${WHICH_COB}/lib -lgfortran' >> Make.mach.fedora"
+    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_COB}' >> Make.mach.fedora"
     "make clean"
     "make machine-fedora"
     "make"
-    "mkdir -p ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
+    "mkdir -p ${SOIL_HOME}/${WHICH_COB}"
     "make install"
 )
 NEEDS=(

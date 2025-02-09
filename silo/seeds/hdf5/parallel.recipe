@@ -1,4 +1,12 @@
 STEPS=(
-    "CC=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}/bin/mpicc CPPFLAGS=-I${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}/include LDFLAGS=-L${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}/lib ./configure --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} --with-zlib=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}/include,${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}/lib --enable-build-mode=production --enable-parallel" 
-    "make && make check && make install && make check-install"
+    "./configure --prefix=${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED} \
+        --with-zlib=${SOIL_HOME}/${WHICH_COB}/zlib/ \
+        --enable-shared=no \
+        --enable-build-mode=production \
+        --enable-parallel"
+    "make -j12"
+    "make check"
+    "make install"
+    "make check-install"
 )
+NEEDS=(openmpi_5.0.6_default zlib_1.3.1_default)

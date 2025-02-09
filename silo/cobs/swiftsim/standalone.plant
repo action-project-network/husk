@@ -1,0 +1,1 @@
+LD_LIBRARY_PATH="./.husk/swiftsim/standalone/cfitsio/lib" ./.husk/swiftsim/standalone/swiftsim/bin/swift

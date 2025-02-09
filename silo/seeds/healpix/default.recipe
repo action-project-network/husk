@@ -1,6 +1,7 @@
 STEPS=(
-    "FITSDIR=${SOIL_HOME}/${WHICH_COB}/cfitsio/lib C_SHARED=1 ./configure -L --auto=c"
+    "FITSDIR=${SOIL_HOME}/${WHICH_COB}/cfitsio/lib FITSINC=${SOIL_HOME}/${WHICH_COB}/cfitsio/include C_SHARED=0./configure -L --auto=c"
     "make -j12 c-all"
+    "make c-test"
     "mkdir -p ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
     "cp -R * ${SOIL_HOME}/${WHICH_COB}/${WHICH_SEED}"
 )

@@ -1,5 +1,10 @@
 STEPS=(
-    "./configure --prefix=${SOIL_HOME}/${WHICH_NURSERY}/${WHICH_SEED}"
+    "LDFLAGS=-L/soil/.nursery/swiftsim/standalone/cob/zlib/lib \
+        CPPFLAGS=-I/soil/.nursery/swiftsim/standalone/cob/zlib/include \
+        ./configure \
+        --prefix=${SOIL_HOME}/${WHICH_NURSERY}/${WHICH_SEED}\
+        --enable-static \
+        --disable-shared"
     "make -j12"
     "make testprog"
     "./testprog > testprog.lis"

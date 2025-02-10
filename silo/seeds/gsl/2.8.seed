@@ -1,4 +1,3 @@
-DEPENDENCIES=(gcc autoconf automake libtool)
 URL="https://git.savannah.gnu.org/cgit/gsl.git/snapshot/gsl-release-2-8.tar.gz"
 CHECKSUM="9a8905b4d07ce8cda5b97ad8bdb40e953f31e55b6ebe406a5b8a1213e754ca05"
 SOURCE="gsl-release-2-8"

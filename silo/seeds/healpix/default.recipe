@@ -1,8 +1,8 @@
 STEPS=(
-    "FITSDIR=${SOIL_HOME}/${WHICH_NURSERY}/cfitsio/lib FITSINC=${SOIL_HOME}/${WHICH_NURSERY}/cfitsio/include C_SHARED=0 C_FITS=1 ./configure --auto=c"
+    "FITSDIR=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/cfitsio/lib FITSINC=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/cfitsio/include C_SHARED=0 C_FITS=1 ./configure --auto=c"
     "make -j12 c-all"
     "make c-test"
-    "mkdir -p ${SOIL_HOME}/${WHICH_NURSERY}/${WHICH_SEED}"
-    "cp -R * ${SOIL_HOME}/${WHICH_NURSERY}/${WHICH_SEED}"
+    "mkdir -p ${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/${WHICH_SEED}"
+    "cp -R * ${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/${WHICH_SEED}"
 )
 NEEDS=(cfitsio_4.5.0_default)

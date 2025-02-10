@@ -1,6 +1,6 @@
 STEPS=(
     "./autogen.sh"
-    "./configure -prefix=${SOIL_HOME}/${WHICH_NURSERY}/${WHICH_SEED} --enable-shared=no"
+    "./configure -prefix=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/${WHICH_SEED} --enable-shared=no"
     "make"
     "make install"
 )

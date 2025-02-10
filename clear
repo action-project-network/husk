@@ -2,10 +2,52 @@
 # Author: Shree Raj Shrestha
 # Date: 02/06/2025
 set -ueox pipefail
-podman container rm --force $(podman container ls --filter "status=exited" --format='{{.Names}}' | grep -e "harvest" -e "farm") && true
-podman image rm --force $(podman image ls --format='{{.Repository}}' | grep -e "soil" -e "harvest" -e "farm") && true
-find . -name "*.tar.bz2" -type f -delete
-find . -name "*.tar.gz" -type f -delete
-find . -name "*.zip" -type f -delete
-find . -name "*.git" -type f -delete
-find . -name "*.seed" -type f -exec grep -l 'URL=.*.git"' {} \; | xargs sed -i '/CHECKSUM/d'
+
+function clearContainers() {
+    podman container rm --force $(podman container ls --filter "status=exited" --format='{{.Names}}' | grep -e "soil") || true
+}
+
+function purgeContainers() {
+    podman container rm --force $(podman container ls --format='{{.Names}}' | grep -e "soil") || true
+}
+
+function clearImages() {
+    podman image rm --force $(podman image ls --format='{{.Repository}}' | grep -e "soil") || true
+}
+
+function clearSeeds() {
+    find . -name "*.tar.bz2" -type f -delete
+    find . -name "*.tar.gz" -type f -delete
+    find . -name "*.zip" -type f -delete
+    find . -name "*.git" -type f -delete
+}
+
+function clearFarm() {
+    rm -rf "./.farm"
+}
+
+function clearNursery() {
+    rm -rf "./.nursery"
+}
+
+if [[ "${1}" == "containers" ]]; then
+    clearContainers
+elif [[ "${1}" == "images" ]]; then
+    clearImages
+elif [[ "${1}" == "seeds" ]]; then
+    clearSeeds
+elif [[ "${1}" == "nursery" ]]; then
+    clearNursery
+elif [[ "${1}" == "farm" ]]; then
+    clearFarm
+elif [[ "${1}" == "soil" ]]; then
+    clearContainers
+    clearImages
+    clearSeeds
+elif [[ "${1}" == "purge" ]]; then
+    purgeContainers
+    clearImages
+    clearSeeds
+    clearFarm
+    clearNursery
+fi

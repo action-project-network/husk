@@ -2,7 +2,7 @@
 # Author: Shree Raj Shrestha
 # Date: 01/28/2025
 set -ueox pipefail
-source ./rake "${1}"
+source ./rake "${1}" "${2}"
 
 function getSeed() {
     NEEDS=()
@@ -10,7 +10,7 @@ function getSeed() {
     source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 3).recipe" 
     for NEED in "${NEEDS[@]}"
     do
-        if [[ ! ${COB_RESOLVED[@]} =~ ${NEED} ]]; then
+        if [[ ! "${COB_RESOLVED[@]}" =~ ${NEED} ]]; then
             getSeed "${NEED}"
         fi
     done
@@ -19,7 +19,7 @@ function getSeed() {
     cd "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)"
 
     ARCHIVE=$(echo "${URL##*/}")
-    if [[ $URL =~ .*.git$ ]]; then
+    if [[ "${URL}" =~ .*.git$ ]]; then
         REPO_BASE=$(basename "${URL}")
         REPO="${REPO_BASE%.*}"
         ARCHIVE_SEED=true
@@ -33,7 +33,7 @@ function getSeed() {
                 ARCHIVE_SEED=false
             fi
         fi
-        if $ARCHIVE_SEED; then 
+        if "${ARCHIVE_SEED}"; then 
             rm -rf "${REPO}" && git clone --depth=1 "${URL}"
             cd "${REPO}"
             git reset --hard "${COMMIT}"
@@ -52,34 +52,34 @@ function getSeed() {
     fi
 
     cd "${HUSK_HOME}"
-    for DEPENDENCY in "${DEPENDENCIES[@]}"
+    source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${WHICH_SOIL}" 
+    for REQUIREMENT in "${REQUIREMENTS[@]}"
     do
-        if [[ $DEPENDENCY =~ .*:.* ]]; then
-            DEPENDENCY=$(echo "${DEPENDENCY}" |  cut -d ":" -f 1)
+        if [[ "${REQUIREMENT}" =~ .*:.* ]]; then
+            REQUIREMENT=$(echo "${REQUIREMENT}" |  cut -d ":" -f 1)
         fi
-        if [[ ! $SOIL_REQUIREMENTS =~ "${DEPENDENCY}" ]]; then
-            SOIL_REQUIREMENTS=$SOIL_REQUIREMENTS" "$DEPENDENCY
+        if [[ ! "${SOIL_REQUIREMENTS}" =~ "${REQUIREMENT}" ]]; then
+            if [[ -z "${SOIL_REQUIREMENTS}" ]]; then
+                SOIL_REQUIREMENTS="${REQUIREMENT}"
+            else
+                SOIL_REQUIREMENTS="${SOIL_REQUIREMENTS} ${REQUIREMENT}"
+            fi
         fi
     done
-    if [[ ! ${COB_RESOLVED[@]} =~ ${1} ]]; then
+    if [[ ! "${COB_RESOLVED[@]}" =~ ${1} ]]; then
         COB_RESOLVED+=($1)
     fi
 }
 
-
-if [[ ! $WHICH =~ .*cob$ ]]; then
-    echo "can only gather seeds for cobs" && exit 1
-fi
-
-THIS_COB="${HUSK_HOME}/silo/cobs/${RAKE_PATH///cob/}.cob"
-source "${THIS_COB}"
+source "${HUSK_HOME}/${RAKE_PATH}"
 COB_RESOLVED=()
+SOIL_REQUIREMENTS=""
 for SEED in "${COB[@]}"
 do
     getSeed "${SEED}"
 done
-sed -i '/COB/d' "${THIS_COB}"
-sed -i '/SOIL_REQUIREMENTS/d' "${THIS_COB}"
-echo "COB=(${COB_RESOLVED[@]})" >> "${THIS_COB}"
-printf "\nSOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS}\"" >> "${THIS_COB}"
-sed -i '/^[[:space:]]*$/d' "${THIS_COB}"
+sed -i '/COB/d' "${HUSK_HOME}/${RAKE_PATH}"
+sed -i '/SOIL_REQUIREMENTS/d' "${HUSK_HOME}/${RAKE_PATH}"
+echo "COB=(${COB_RESOLVED[@]})" >> "${HUSK_HOME}/${RAKE_PATH}"
+printf "\nSOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS}\"" >> "${HUSK_HOME}/${RAKE_PATH}"
+sed -i '/^[[:space:]]*$/d' "${HUSK_HOME}/${RAKE_PATH}"

@@ -2,7 +2,7 @@
 # Author: Shree Raj Shrestha
 # Date: 01/20/2025
 set -ueox pipefail
-source /soil/rake "${1}"
+EPHEMERAL=${HOME}/ephemeral/${RANDOM}
 mkdir -p "${EPHEMERAL}"
 
 source "${SOIL_HOME}/silo/seeds/$(echo "${2}" | cut -d "_" -f 1)/$(echo "${2}" | cut -d "_" -f 2).seed"

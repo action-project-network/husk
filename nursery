@@ -2,22 +2,19 @@
 # Author: Shree Raj Shrestha
 # Date: 01/28/2025
 set -ueox pipefail
-source ./rake "${1}"
+source ./rake "${1}" "${2}"
 
 function clear() {
-    podman container stop "${1}" && true
-    podman container rm --force "${1}"
+    podman container stop "${WHICH_POD}" || true
+    podman container rm --force "${WHICH_POD}"
 }
 
-if [[ $WHICH =~ .*cob$ ]]; then
-    clear "${WHICH}"
-    podman run -d --name "${WHICH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH}" "${SOIL_HOME}/unshell" "${1}"
-elif [[ $WHICH =~ .*farm$ ]]; then
-    clear "${WHICH}"
-    podman run -d --name "${WHICH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH}" "${SOIL_HOME}/plant" "${1}"
-elif [[ $WHICH =~ .*empty$ ]]; then
-    clear "${WHICH}"
-    podman run -d --name "${WHICH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH}" "/bin/bash"
+if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then
+    clear "${WHICH_POD}"
+    podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" "${SOIL_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}"
+elif [[ "${WHICH_SILO}" =~ .*farm$ ]]; then
+    clear "${WHICH_POD}"
+    podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" "${SOIL_HOME}/farm" "${WHICH_SILO}" "${WHICH_SOIL}"
 else
-    echo "cannot nursery unsupported soil" && exit 1
+    echo "cannot nursery unsupported silo, can be cob or farm" && exit 1
 fi

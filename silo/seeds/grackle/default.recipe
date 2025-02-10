@@ -1,9 +1,9 @@
 STEPS=(
     "cd ./src/clib"
     "cp Make.mach.linux-gnu Make.mach.fedora"
-    "echo 'MACH_INCLUDES = -I${SOIL_HOME}/${WHICH_NURSERY}/hdf5/include' >> Make.mach.fedora"
-    "echo 'MACH_LIBS = -L${SOIL_HOME}/${WHICH_NURSERY}/hdf5/lib -lgfortran' >> Make.mach.fedora"
-    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_NURSERY}/grackle' >> Make.mach.fedora"
+    "echo 'MACH_INCLUDES = -I${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/hdf5/include' >> Make.mach.fedora"
+    "echo 'MACH_LIBS = -L${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/hdf5/lib -lgfortran' >> Make.mach.fedora"
+    "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/grackle' >> Make.mach.fedora"
     "cd .."
     "cd .."
     "./configure"

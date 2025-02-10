@@ -1,6 +1,6 @@
 STEPS=(
-    "./configure --prefix=${SOIL_HOME}/${WHICH_NURSERY}/${WHICH_SEED} \
-        --with-zlib=${SOIL_HOME}/${WHICH_NURSERY}/zlib/ \
+    "./configure --prefix=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/${WHICH_SEED} \
+        --with-zlib=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/zlib/ \
         --enable-shared=no \
         --enable-build-mode=production \
         --enable-parallel"

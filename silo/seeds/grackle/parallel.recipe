@@ -1,8 +1,8 @@
 STEPS=(
     "cmake \
-        -DCMAKE_INSTALL_PREFIX=${SOIL_HOME}/${WHICH_NURSERY}/${WHICH_SEED} \
+        -DCMAKE_INSTALL_PREFIX=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/${WHICH_SEED} \
         -DBUILD_SHARED_LIBS=ON \
-        -DHDF5_ROOT=${SOIL_HOME}/${WHICH_NURSERY}/hdf5 \
+        -DHDF5_ROOT=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/hdf5 \
         -DHDF5_PREFER_PARALLEL=true \
         -B ./build"
     "cmake --build ./build"

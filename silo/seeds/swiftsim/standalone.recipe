@@ -8,9 +8,9 @@ STEPS=(
         --with-gsl=${SOIL_HOME}/${WHICH_NURSERY}/gsl \
         --with-numa=${SOIL_HOME}/${WHICH_NURSERY}/numa \
         --with-jemalloc=${SOIL_HOME}/${WHICH_NURSERY}/jemalloc \
-        --with-cfitsio=${SOIL_HOME}/${WHICH_NURSERY}/cfitsio \
         --enable-lightcone \
-        --with-chealpix=/${SOIL_HOME}/${WHICH_NURSERY}/healpix"
+        --with-chealpix=/${SOIL_HOME}/${WHICH_NURSERY}/healpix \
+        --with-cfitsio=${SOIL_HOME}/${WHICH_NURSERY}/cfitsio"
     "make -j12 all"
     "make install"
 )

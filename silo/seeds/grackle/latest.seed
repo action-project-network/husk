@@ -1,4 +1,0 @@
-DEPENDENCIES=(gcc gcc-gfortran autoconf automake libtool)
-URL="https://github.com/grackle-project/grackle.git"
-COMMIT="fca6db9657f16f8ae1e68afdad4b49f3110f7027"
-SOURCE="grackle"

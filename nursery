@@ -9,15 +9,15 @@ function clear() {
     podman container rm --force "${1}"
 }
 
-if [[ $WHICH_SOIL =~ .*cob$ ]]; then
-    clear "${WHICH_SOIL}"
-    podman run -d --name "${WHICH_SOIL}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_SOIL}" "${SOIL_HOME}/unshell" "${1}"
-elif [[ $WHICH_SOIL =~ .*farm$ ]]; then
-    clear "${WHICH_SOIL}"
-    podman run -d --name "${WHICH_SOIL}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_SOIL}" "${SOIL_HOME}/plant" "${1}"
-elif [[ $WHICH_SOIL =~ .*empty$ ]]; then
-    clear "${WHICH_SOIL}"
-    podman run -d --name "${WHICH_SOIL}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_SOIL}" "/bin/bash"
+if [[ $WHICH =~ .*cob$ ]]; then
+    clear "${WHICH}"
+    podman run -d --name "${WHICH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH}" "${SOIL_HOME}/unshell" "${1}"
+elif [[ $WHICH =~ .*farm$ ]]; then
+    clear "${WHICH}"
+    podman run -d --name "${WHICH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH}" "${SOIL_HOME}/plant" "${1}"
+elif [[ $WHICH =~ .*empty$ ]]; then
+    clear "${WHICH}"
+    podman run -d --name "${WHICH}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH}" "/bin/bash"
 else
     echo "cannot nursery unsupported soil" && exit 1
 fi

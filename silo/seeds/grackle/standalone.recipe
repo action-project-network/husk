@@ -1,12 +1,16 @@
 STEPS=(
+    "./configure"
     "cd ./src/clib"
     "cp Make.mach.linux-gnu Make.mach.fedora"
     "echo 'MACH_INCLUDES = -I${SOIL_HOME}/${WHICH_NURSERY}/hdf5/include' >> Make.mach.fedora"
     "echo 'MACH_LIBS = -L${SOIL_HOME}/${WHICH_NURSERY}/hdf5/lib -lgfortran' >> Make.mach.fedora"
     "echo 'MACH_INSTALL_PREFIX = ${SOIL_HOME}/${WHICH_NURSERY}/grackle' >> Make.mach.fedora"
-    "cd .."
-    "cd .."
-    "./configure"
+    "mkdir -p ${SOIL_HOME}/${WHICH_NURSERY}/grackle"
+    "make clean"
+    "make machine-fedora"
+    "make"
+    "mkdir -p ${SOIL_HOME}/${WHICH_NURSERY}"
+    "make install"
 )
 NEEDS=(
     hdf5_1.14.5_standalone

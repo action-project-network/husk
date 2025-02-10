@@ -67,7 +67,7 @@ function getSeed() {
 }
 
 
-if [[ ! $WHICH_SOIL =~ .*cob$ ]]; then
+if [[ ! $WHICH =~ .*cob$ ]]; then
     echo "can only gather seeds for cobs" && exit 1
 fi
 

@@ -1,0 +1,10 @@
+#!/bin/sh
+# Author: Shree Raj Shrestha
+# Date: 02/08/2025
+set -ueox pipefail
+
+python -m venv venv
+source ./venv/bin/activate
+pip install matplotlib swiftsimio scipy pylatex
+eval "python3 ${FARM}/${SIM}/plotProjection.py 31"
+deactivate

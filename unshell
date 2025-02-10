@@ -4,7 +4,7 @@
 set -ueox pipefail
 source /soil/rake "${1}"
 
-if [[ ! $WHICH_SOIL =~ .*cob$ ]]; then
+if [[ ! $WHICH =~ .*cob$ ]]; then
     echo "can only gather seeds for cobs" && exit 1
 fi
 source "${SOIL_HOME}/silo/cobs/${RAKE_PATH///cob/}.cob"

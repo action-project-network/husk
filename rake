@@ -5,7 +5,7 @@ set -ueox pipefail
 
 HUSK_HOME="${PWD}"
 SOIL_HOME="/soil"
-WHICH_SOIL="${1}"
+WHICH="${1}"
 RAKE_PATH="${1//.//}"
 WHICH_NURSERY=".nursery/${RAKE_PATH}"
 WHICH_FARM=".farm/${RAKE_PATH}"

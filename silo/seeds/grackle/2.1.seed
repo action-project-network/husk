@@ -1,0 +1,4 @@
+DEPENDENCIES=(gcc gcc-gfortran autoconf automake libtool)
+URL="https://github.com/grackle-project/grackle/archive/refs/tags/grackle-2.1.tar.gz"
+CHECKSUM="0a65628f6f40735dc55fcaf7faf938f4ee95350eb8da94c2f3c1dc13f5899930"
+SOURCE="grackle-grackle-2.1"

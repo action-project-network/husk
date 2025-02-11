@@ -17,7 +17,4 @@ WHICH_SOIL="${2}"
 if [[ ! "${WHICH_SOIL}" =~ .*soil$ ]]; then
     echo "usage: ./gather some.cob some.soil" && exit 1
 fi
-HUSK_HOME="${PWD}"
-SOIL_HOME="/soil"
-NURSERY_HOME=".nursery"
 WHICH_POD="${WHICH_SILO}.${WHICH_SOIL}"

@@ -2,10 +2,11 @@
 # Author: Shree Raj Shrestha
 # Date: 01/30/2025
 set -ueox pipefail
+source /soil/home
 source /soil/rake "${1}" "${2}"
 source "${SOIL_HOME}/${RAKE_PATH}"
 for SEED in "${COB[@]}"; do
-    if [ ! -d "${SOIL_HOME}/${NURSERY_HOME}/$(echo "${SEED}" | cut -d "_" -f 1)" ]; then
-        SOIL_HOME="${SOIL_HOME}" NURSERY_HOME="${NURSERY_HOME}" WHICH_POD="${WHICH_POD}" sh -c "/soil/sprout ${1} ${SEED}";
+    if [ ! -d "${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/$(echo "${SEED}" | cut -d "_" -f 1)" ]; then
+        /soil/sprout "${SEED}" "${WHICH_POD}"
     fi
 done

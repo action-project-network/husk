@@ -2,5 +2,6 @@
 # Author: Shree Raj Shrestha
 # Date: 02/10/2025
 set -ueox pipefail
+source ./home
 source ./rake "${1}" "${2}"
 podman run --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -it "${WHICH_SOIL/.soil/}:latest" "/bin/bash"

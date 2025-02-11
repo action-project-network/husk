@@ -1,0 +1,7 @@
+#!/bin/sh
+# Author: Shree Raj Shrestha
+# Date: 02/09/2025
+set -ueox pipefail
+HUSK_HOME="${PWD}"
+SOIL_HOME="/soil"
+NURSERY_HOME=".nursery"

@@ -3,51 +3,73 @@
 # Date: 02/06/2025
 set -ueox pipefail
 
-function clearContainers() {
+function removeContainer() {
+    podman container rm --force "${1}" || true
+}
+
+function removeStoppedContainers() {
     podman container rm --force $(podman container ls --filter "status=exited" --format='{{.Names}}' | grep -e "soil") || true
 }
 
-function purgeContainers() {
+function removeAllContainers() {
     podman container rm --force $(podman container ls --format='{{.Names}}' | grep -e "soil") || true
 }
 
-function clearImages() {
+function removeAllImages() {
     podman image rm --force $(podman image ls --format='{{.Repository}}' | grep -e "soil") || true
 }
 
-function clearSeeds() {
+function removeAllSeeds() {
     find . -name "*.tar.bz2" -type f -delete
     find . -name "*.tar.gz" -type f -delete
     find . -name "*.zip" -type f -delete
     find . -name "*.git" -type f -delete
 }
 
-function clearFarm() {
+function removeFarm() {
+    rm -rf "./.farm/${1}"
+}
+
+function removeAllFarms() {
     rm -rf "./.farm"
 }
 
-function clearNursery() {
+function removeNursery() {
+    rm -rf "./.nursery/${1}"
+}
+
+function removeAllNurseries() {
     rm -rf "./.nursery"
 }
 
-if [[ "${1}" == "containers" ]]; then
-    clearContainers
-elif [[ "${1}" == "images" ]]; then
-    clearImages
-elif [[ "${1}" == "seeds" ]]; then
-    clearSeeds
-elif [[ "${1}" == "nursery" ]]; then
-    clearNursery
-elif [[ "${1}" == "farm" ]]; then
-    clearFarm
-elif [[ "${1}" == "soil" ]]; then
-    clearContainers
-    clearImages
-    clearSeeds
-elif [[ "${1}" == "purge" ]]; then
-    purgeContainers
-    clearImages
-    clearSeeds
-    clearFarm
-    clearNursery
+if [[ "${@}" =~ ^container' '.*$ ]]; then
+    removeContainer "${2}"
+elif [[ "${@}" =~ ^stopped' 'containers$ ]]; then
+    removeStoppedContainers
+elif [[ "${@}" =~ ^all' 'containers$ ]]; then
+    removeAllContainers
+elif [[ "${@}" =~ ^all' 'images$ ]]; then
+    removeAllImages
+elif [[ "${@}" =~ ^all' 'seeds$ ]]; then
+    removeAllSeeds
+elif [[ "${@}" =~ ^nursery' '.*$ ]]; then
+    removeNursery "${2}"
+elif [[ "${@}" =~ ^all' 'nurseries$ ]]; then
+    removeAllNurseries
+elif [[ "${@}" =~ ^farm' '.*$ ]]; then
+    removeFarm "${2}"
+elif [[ "${@}" =~ ^all' 'farms$ ]]; then
+    removeAllFarms
+elif [[ "${@}" =~ ^all' 'soil$ ]]; then
+    removeAllContainers
+    removeAllImages
+elif [[ "${@}" =~ ^all' 'silo$ ]]; then
+    removeAllFarms
+    removeAllNurseries
+elif [[ "${@}" =~ ^all$ ]]; then
+    removeAllContainers
+    removeAllImages
+    removeAllSeeds
+    removeAllFarms
+    removeAllNurseries
 fi

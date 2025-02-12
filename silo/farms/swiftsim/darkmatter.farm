@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Author: Shree Raj Shrestha
 # Date: 02/08/2025
 set -ueox pipefail

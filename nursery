@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Author: Shree Raj Shrestha
 # Date: 01/28/2025
 set -ueox pipefail
@@ -12,10 +12,10 @@ function clear() {
 
 if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then
     clear "${WHICH_POD}"
-    podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" "${SOIL_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}"
+    podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" "$(which bash)" "${SOIL_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}"
 elif [[ "${WHICH_SILO}" =~ .*farm$ ]]; then
     clear "${WHICH_POD}"
-    podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" "${SOIL_HOME}/farm" "${WHICH_SILO}" "${WHICH_SOIL}"
+    podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" ""$(which bash)" ${SOIL_HOME}/farm" "${WHICH_SILO}" "${WHICH_SOIL}"
 else
     echo "cannot nursery unsupported silo, can be cob or farm" && exit 1
 fi

@@ -3,6 +3,5 @@
 **.zip
 **.tar.bz2
 **.git
-/silo/cobs/wip/*
+/silo/cobs/**/.*
 /silo/cobs/**/*.cob
-/silo/cobs/**/*.soil

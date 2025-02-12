@@ -1,0 +1,3 @@
+FROM ubuntu
+ARG SOIL_REQUIREMENTS
+RUN apt update && apt install -y $SOIL_REQUIREMENTS

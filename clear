@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 # Author: Shree Raj Shrestha
 # Date: 02/06/2025
 set -ueox pipefail
 
 function removeContainer() {
-    podman container rm --force "${1}" || true
+    podman container rm --force "${1}"
 }
 
 function removeStoppedContainers() {
@@ -13,6 +13,10 @@ function removeStoppedContainers() {
 
 function removeAllContainers() {
     podman container rm --force $(podman container ls --format='{{.Names}}' | grep -e "soil") || true
+}
+
+function removeImage() {
+    podman image rm --force "${1}"
 }
 
 function removeAllImages() {
@@ -53,6 +57,8 @@ elif [[ "${@}" =~ ^stopped' 'containers$ ]]; then
     removeStoppedContainers
 elif [[ "${@}" =~ ^all' 'containers$ ]]; then
     removeAllContainers
+elif [[ "${@}" =~ ^image' '.*$ ]]; then
+    removeImage "${2}"
 elif [[ "${@}" =~ ^all' 'images$ ]]; then
     removeAllImages
 elif [[ "${@}" =~ ^all' 'cobs$ ]]; then
@@ -67,12 +73,13 @@ elif [[ "${@}" =~ ^farm' '.*$ ]]; then
     removeFarm "${2}"
 elif [[ "${@}" =~ ^all' 'farms$ ]]; then
     removeAllFarms
-elif [[ "${@}" =~ ^all' 'soil$ ]]; then
+elif [[ "${@}" =~ ^all' 'soils$ ]]; then
     removeAllContainers
     removeAllImages
-elif [[ "${@}" =~ ^all' 'silo$ ]]; then
+elif [[ "${@}" =~ ^all' 'silos$ ]]; then
     removeAllFarms
     removeAllNurseries
+    removeAllCobs
 elif [[ "${@}" =~ ^all$ ]]; then
     removeAllContainers
     removeAllImages

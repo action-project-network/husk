@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Author: Shree Raj Shrestha
 # Date: 02/09/2025
 set -ueox pipefail
@@ -7,3 +7,4 @@ source ./rake "${1}" "${2}"
 ./gather "${WHICH_SILO}" "${WHICH_SOIL}"
 ./spin "${WHICH_SILO}" "${WHICH_SOIL}"
 ./nursery "${WHICH_SILO}" "${WHICH_SOIL}"
+./peek "${WHICH_SILO}" "${WHICH_SOIL}"

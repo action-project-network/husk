@@ -7,10 +7,7 @@ STEPS=(
         --with-metis=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/metis \
         --with-gsl=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/gsl \
         --with-numa=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/numa \
-        --with-jemalloc=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/jemalloc \
-        --enable-lightcone \
-        --with-chealpix=/${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/healpix \
-        --with-cfitsio=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/cfitsio"
+        --with-jemalloc=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/jemalloc"
     "make -j12 all"
     "make install"
 )
@@ -20,7 +17,5 @@ NEEDS=(
     metis_5.1.1_default \
     gsl_2.8_default \
     numa_2.0.19_default \
-    jemalloc_5.3.0_default \
-    healpix_3.83_default \
-    cfitsio_4.5.0_default
+    jemalloc_5.3.0_default
 )

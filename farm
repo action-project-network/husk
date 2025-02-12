@@ -1,5 +1,0 @@
-#!/bin/bash
-# Author: Shree Raj Shrestha
-# Date: 02/09/2025
-set -ueox pipefail
-echo "work in progress"

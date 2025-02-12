@@ -51,8 +51,7 @@ Git projects, i.e. git clone, are packaged as a *tar.gz* archive using the *.git
 ## Workflow
 Example:
 ```bash
-./gather swiftsim.standalone
-./spin swiftsim.standalone
-./harvest swiftsim.standalone
-./peek swiftsim.standalone
+./collect swiftsim.standalone.cob fedora.soil
+./collect swiftsim.darkmatter.farm fedora.soil
+./collect swiftsim.darkmatter.harvest fedora.soil
 ```

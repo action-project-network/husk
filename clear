@@ -43,6 +43,14 @@ function removeAllFarms() {
     rm -rf "./.farm"
 }
 
+function removeHarvest() {
+    rm -rf "./.harvest/${1}"
+}
+
+function removeAllHarvests() {
+    rm -rf "./.harvest"
+}
+
 function removeNursery() {
     rm -rf "./.nursery/${1}"
 }
@@ -78,12 +86,15 @@ elif [[ "${@}" =~ ^all' 'soils$ ]]; then
     removeAllImages
 elif [[ "${@}" =~ ^all' 'silos$ ]]; then
     removeAllFarms
+    removeAllHarvests
     removeAllNurseries
     removeAllCobs
 elif [[ "${@}" =~ ^all$ ]]; then
     removeAllContainers
     removeAllImages
     removeAllSeeds
+    removeAllCobs
     removeAllFarms
+    removeAllHarvests
     removeAllNurseries
 fi

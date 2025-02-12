@@ -2,9 +2,10 @@
 # Author: Shree Raj Shrestha
 # Date: 02/09/2025
 set -ueox pipefail
-source ./home
+
 source ./rake "${1}" "${2}"
-./gather "${WHICH_SILO}" "${WHICH_SOIL}"
-./spin "${WHICH_SILO}" "${WHICH_SOIL}"
+if [[ "${RAKE_PATH}" =~ .*cob$ ]]; then ./gather "${WHICH_SILO}" "${WHICH_SOIL}"; fi
+if [[ "${RAKE_PATH}" =~ .*cob$ ]] || [[ "${RAKE_PATH}" =~ .*harvest$ ]]; then ./spin "${WHICH_SILO}" "${WHICH_SOIL}"; fi
 ./nursery "${WHICH_SILO}" "${WHICH_SOIL}"
-./peek "${WHICH_SILO}" "${WHICH_SOIL}"
+if [[ "${RAKE_PATH}" =~ .*cob$ ]] || [[ "${RAKE_PATH}" =~ .*harvest$ ]]; then ./peek "${WHICH_SILO}" "${WHICH_SOIL}"; fi
+

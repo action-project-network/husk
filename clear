@@ -19,6 +19,11 @@ function removeAllImages() {
     podman image rm --force $(podman image ls --format='{{.Repository}}' | grep -e "soil") || true
 }
 
+function removeAllCobs() {
+    find "./silo/cobs" -name "*.cob" -type f -delete
+    find "./silo/cobs" -name "*.soil" -type f -delete
+}
+
 function removeAllSeeds() {
     find . -name "*.tar.bz2" -type f -delete
     find . -name "*.tar.gz" -type f -delete
@@ -50,6 +55,8 @@ elif [[ "${@}" =~ ^all' 'containers$ ]]; then
     removeAllContainers
 elif [[ "${@}" =~ ^all' 'images$ ]]; then
     removeAllImages
+elif [[ "${@}" =~ ^all' 'cobs$ ]]; then
+    removeAllCobs
 elif [[ "${@}" =~ ^all' 'seeds$ ]]; then
     removeAllSeeds
 elif [[ "${@}" =~ ^nursery' '.*$ ]]; then

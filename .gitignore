@@ -4,4 +4,5 @@
 **.tar.bz2
 **.git
 /silo/cobs/wip/*
+/silo/cobs/**/*.cob
 /silo/cobs/**/*.soil

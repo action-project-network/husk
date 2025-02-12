@@ -72,15 +72,21 @@ function getSeed() {
     fi
 }
 
-source "${HUSK_HOME}/${RAKE_PATH}"
+source "${HUSK_HOME}/${RAKE_PATH}.husk"
 COB_RESOLVED=()
 SOIL_REQUIREMENTS=""
 for SEED in "${COB[@]}"
 do
     getSeed "${SEED}"
 done
+rm -rf "${HUSK_HOME}/${RAKE_PATH}"
+touch "${HUSK_HOME}/${RAKE_PATH}"
 sed -i '/COB/d' "${HUSK_HOME}/${RAKE_PATH}"
-sed -i '/SOIL_REQUIREMENTS/d' "${HUSK_HOME}/${RAKE_PATH}"
-echo "COB=(${COB_RESOLVED[@]})" >> "${HUSK_HOME}/${RAKE_PATH}"
-printf "\nSOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS}\"" >> "${HUSK_HOME}/${RAKE_PATH}"
+echo -n "COB=(${COB_RESOLVED[@]})" >> "${HUSK_HOME}/${RAKE_PATH}"
 sed -i '/^[[:space:]]*$/d' "${HUSK_HOME}/${RAKE_PATH}"
+
+rm -rf "${HUSK_HOME}/$(dirname ${RAKE_PATH})/${WHICH_SOIL}"
+touch "${HUSK_HOME}/$(dirname ${RAKE_PATH})/${WHICH_SOIL}"
+sed -i '/SOIL_REQUIREMENTS/d' "${HUSK_HOME}/$(dirname ${RAKE_PATH})/${WHICH_SOIL}"
+printf "\nSOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS}\"" >> "${HUSK_HOME}/$(dirname ${RAKE_PATH})/${WHICH_SOIL}"
+sed -i '/^[[:space:]]*$/d' "${HUSK_HOME}/$(dirname ${RAKE_PATH})/${WHICH_SOIL}"

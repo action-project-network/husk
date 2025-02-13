@@ -23,9 +23,20 @@ function removeAllImages() {
     podman image rm --force $(podman image ls --format='{{.Repository}}' | grep -e "soil") || true
 }
 
+function removeCob() {
+    find "./silo/cobs/${1}" -name "*.cob" -type f -delete
+    find "./silo/cobs/${1}" -name "*.soil" -type f -delete
+    rm -rf "./.cob/${1}"
+}
+
 function removeAllCobs() {
     find "./silo/cobs" -name "*.cob" -type f -delete
     find "./silo/cobs" -name "*.soil" -type f -delete
+    rm -rf "./.cob"
+}
+
+function removeNursery() {
+    rm -rf "./.nursery/${1}"
 }
 
 function removeAllSeeds() {
@@ -51,14 +62,6 @@ function removeAllHarvests() {
     rm -rf "./.harvest"
 }
 
-function removeNursery() {
-    rm -rf "./.nursery/${1}"
-}
-
-function removeAllNurseries() {
-    rm -rf "./.nursery"
-}
-
 if [[ "${@}" =~ ^container' '.*$ ]]; then
     removeContainer "${2}"
 elif [[ "${@}" =~ ^stopped' 'containers$ ]]; then
@@ -69,14 +72,12 @@ elif [[ "${@}" =~ ^image' '.*$ ]]; then
     removeImage "${2}"
 elif [[ "${@}" =~ ^all' 'images$ ]]; then
     removeAllImages
+elif [[ "${@}" =~ ^cob' '.*$ ]]; then
+    removeCob "${2}"
 elif [[ "${@}" =~ ^all' 'cobs$ ]]; then
     removeAllCobs
 elif [[ "${@}" =~ ^all' 'seeds$ ]]; then
     removeAllSeeds
-elif [[ "${@}" =~ ^nursery' '.*$ ]]; then
-    removeNursery "${2}"
-elif [[ "${@}" =~ ^all' 'nurseries$ ]]; then
-    removeAllNurseries
 elif [[ "${@}" =~ ^farm' '.*$ ]]; then
     removeFarm "${2}"
 elif [[ "${@}" =~ ^all' 'farms$ ]]; then
@@ -87,7 +88,6 @@ elif [[ "${@}" =~ ^all' 'soils$ ]]; then
 elif [[ "${@}" =~ ^all' 'silos$ ]]; then
     removeAllFarms
     removeAllHarvests
-    removeAllNurseries
     removeAllCobs
 elif [[ "${@}" =~ ^all$ ]]; then
     removeAllContainers
@@ -96,5 +96,4 @@ elif [[ "${@}" =~ ^all$ ]]; then
     removeAllCobs
     removeAllFarms
     removeAllHarvests
-    removeAllNurseries
 fi

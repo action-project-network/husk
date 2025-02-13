@@ -3,6 +3,7 @@
 # Date: 02/09/2025
 set -ueox pipefail
 
+source ./home
 source ./rake "${1}" "${2}"
 if [[ "${RAKE_PATH}" =~ .*cob$ ]]; then ./gather "${WHICH_SILO}" "${WHICH_SOIL}"; fi
 if [[ "${RAKE_PATH}" =~ .*cob$ ]] || [[ "${RAKE_PATH}" =~ .*harvest$ ]]; then ./spin "${WHICH_SILO}" "${WHICH_SOIL}"; fi

@@ -6,7 +6,7 @@ source /soil/home
 source /soil/rake "${1}" "${2}"
 source "${SOIL_HOME}/${RAKE_PATH}"
 for SEED in "${COB[@]}"; do
-    if [ ! -d "${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/$(echo "${SEED}" | cut -d "_" -f 1)" ]; then
+    if [ ! -d "${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/$(echo "${SEED}" | cut -d "_" -f 1)" ]; then
         "$(which bash)" /soil/sprout "${SEED}" "${WHICH_POD}"
     fi
 done

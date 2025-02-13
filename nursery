@@ -3,6 +3,7 @@
 # Date: 01/28/2025
 set -ueox pipefail
 
+source ./home
 source ./rake "${1}" "${2}"
 
 function clear() {
@@ -14,7 +15,7 @@ if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then
     clear "${WHICH_POD}"
     podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" "$(which bash)" "${SOIL_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}"
 elif [[ "${WHICH_SILO}" =~ .*farm$ ]]; then
-    $(which bash) -c "${RAKE_PATH}"
+    $(which bash) -c "${HUSK_HOME}/${RAKE_PATH} ${WHICH_SILO} ${WHICH_SOIL}"
 elif [[ "${WHICH_SILO}" =~ .*harvest$ ]]; then
     clear "${WHICH_POD}"
     podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" "$(which bash)" "${SOIL_HOME}/${RAKE_PATH}" "${WHICH_SILO}" "${WHICH_SOIL}"

@@ -4,4 +4,5 @@
 set -ueox pipefail
 HUSK_HOME="${PWD}"
 SOIL_HOME="/soil"
-NURSERY_HOME=".nursery"
+COB_HOME=".cob"
+FARM_HOME=".farm"

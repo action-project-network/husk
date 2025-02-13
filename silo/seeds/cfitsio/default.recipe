@@ -1,8 +1,8 @@
 STEPS=(
-    "LDFLAGS=-L${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/swiftsim/standalone/cob/zlib/lib \
-        CPPFLAGS=-I${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/swiftsim/standalone/cob/zlib/include \
+    "LDFLAGS=-L${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/swiftsim/standalone/cob/zlib/lib \
+        CPPFLAGS=-I${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/swiftsim/standalone/cob/zlib/include \
         ./configure \
-        --prefix=${SOIL_HOME}/${NURSERY_HOME}/${WHICH_POD}/${WHICH_SEED}\
+        --prefix=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}\
         --enable-static \
         --disable-shared"
     "make -j12"

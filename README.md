@@ -1,57 +1,47 @@
 # HUSK
 *A framework serving as a support*
 
-https://ahdictionary.com/word/search.html?q=husk
-
 * to build **reproducable**, **modular**, **reusable**, and **composable** scientific softwares
+
+> https://ahdictionary.com/word/search.html?q=husk
 
 
 ## Pre-Requisite
-
-1. Install podman *https://podman.io/docs/installation* 
-
-    * Why Podman?
-        * Daemon-less
-        * Root-less
-```
-dnf install podman
-```
-
+1. Podman
 2. Git
-    * if using seeds that reqiure *git clone*
-```
-dnf install git
+
+Fedora
+```bash
+dnf install podman git
 ```
 
-3. Latex
-    * required to render some projections or plots
+Ubuntu
+```bash
+apt install podman git
 ```
-dnf install texlive-scheme-full
-```
-
-## Adding seeds
-1. This creates the directory *./silo/seeds/\<name>* and adds a file *\<version>.seed*
-```shell
-./seed <name> <url> <version>
-```
-2. Add to the **DEPENDENCIES** of the new seed with what is required to make the seed recipe
-```
-DEPENDENCIES=()
-URL="https://some.package.archive"
-CHECKSUM="sha256sum"
-SOURCE="root-of-extracted-archive"
-```
-Some supported archive format are
-1. *.tar.bz2*
-2. *.tar.gz*
-3. *.zip*
-
-Git projects, i.e. git clone, are packaged as a *tar.gz* archive using the *.git* extension
 
 ## Workflow
-Example:
+1. Collect the cob - compiles the cob and its dependencies to **.cob**
+2. Farm and collect the simulation payload to **.farm**
+3. Harvest the farmed payload into human friendly artifacts to **.harvest**
+
+### An Example with SWIFT
+
+We demonstrate how *husk* can be used to onboard onto *SWIFT* in 2 simple steps
+
+https://github.com/SWIFTSIM/SWIFT
+
+> SWIFT is a gravity and SPH solver designed to run cosmological simulations on peta-scale machines, scaling well up to 10's of thousands of compute node.
+
+For Fedora
 ```bash
 ./collect swiftsim.standalone.cob fedora.soil
 ./collect swiftsim.darkmatter.farm fedora.soil
-./collect swiftsim.darkmatter.harvest fedora.soil
+# WIP ./collect swiftsim.darkmatter.harvest fedora.soil
+```
+For Ubuntu
+```bash
+./collect swiftsim.standalone.cob ubuntu.soil
+./collect swiftsim.darkmatter.farm ubuntu.soil
+# WIP ./collect swiftsim.darkmatter.harvest ubuntu.soil
 ```

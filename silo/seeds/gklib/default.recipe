@@ -1,4 +1,4 @@
 STEPS=(
-    "mkdir -p ${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}"
-    "cp -R * ${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}"
+    "mkdir -p ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}"
+    "cp -R * ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}"
 )

@@ -4,10 +4,9 @@
 set -ueox pipefail
 source /soil/home
 source /soil/rake "${1}" "${2}"
-source 
-mkdir -p "${THIS_HARVEST}"
+mkdir -p "${WHICH_HARVEST}"
 cd "${THIS_HARVEST}"
-ls -la "${W}"
+pwd
 
 #echo "${1}" "${2}"
 # python3 ${FARM}/${SIM}/plotProjection.py 31

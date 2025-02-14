@@ -1,0 +1,7 @@
+#!/bin/bash
+# Author: Shree Raj Shrestha
+# Date: 02/09/2025
+set -ueox pipefail
+sed -i '/HUSK_HOME/d' "./home"
+printf "\nHUSK_HOME=\"${PWD}\"" >> "./home"
+sed -i '/^[[:space:]]*$/d' "./home"

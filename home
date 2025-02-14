@@ -1,9 +1,8 @@
 #!/bin/bash
 # Author: Shree Raj Shrestha
-# Date: 02/09/2025
+# Date: 02/14/2025
 set -ueox pipefail
-HUSK_HOME="${PWD}"
-SOIL_HOME="/soil"
 COB_HOME=".cob"
 FARM_HOME=".farm"
 HARVEST_HOME=".harvest"
+HUSK_HOME="/home/shree/workspace/husk"

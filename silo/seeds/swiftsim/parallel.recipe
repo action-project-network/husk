@@ -1,16 +1,16 @@
 STEPS=(
     "./autogen.sh"
     "./configure \
-        --prefix=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED} \
-        --with-hdf5=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/hdf5/bin/h5cc \
-        --with-fftw=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/fftw \
-        --with-metis=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/metis \
-        --with-gsl=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/gsl \
-        --with-numa=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/numa \
-        --with-jemalloc=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/jemalloc \
-        --with-grackle=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/grackle \
-        --with-chealpix=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/healpix \
-        --with-cfitsio=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/cfitsio"
+        --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED} \
+        --with-hdf5=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/hdf5/bin/h5cc \
+        --with-fftw=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/fftw \
+        --with-metis=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/metis \
+        --with-gsl=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/gsl \
+        --with-numa=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/numa \
+        --with-jemalloc=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/jemalloc \
+        --with-grackle=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/grackle \
+        --with-chealpix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/healpix \
+        --with-cfitsio=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/cfitsio"
     "make -j12 all"
     "make install"
 )

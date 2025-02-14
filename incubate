@@ -1,0 +1,28 @@
+#!/bin/bash
+# Author: Shree Raj Shrestha
+# Date: 01/28/2025
+set -ueox pipefail
+
+source "./home"
+source "${HUSK_HOME}/rake" "${1}" "${2}"
+
+function clear() {
+    podman container stop "${WHICH_POD}" || true
+    podman container rm --force "${WHICH_POD}"
+}
+
+if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then
+    ./clear pod "${WHICH_POD}"
+    podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z -e HUSK_HOME="${HUSK_HOME}" -t "${WHICH_POD}" \
+        "$(which bash)" "${HUSK_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}"
+elif [[ "${WHICH_SILO}" =~ .*farm$ ]] || [[ "${WHICH_SILO}" =~ .*harvest$ ]]; then
+    PREVIOUS_POD=$(podman container ls --filter "name=${WHICH_POD}" --format='{{.ID}}')
+    if [[ -n "${PREVIOUS_POD}" ]]; then
+        podman start "${PREVIOUS_POD}"
+    else
+        podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z -e HUSK_HOME="${HUSK_HOME}" -t "${WHICH_POD}" \
+            "$(which bash)" "${HUSK_HOME}/${RAKE_PATH}" "${WHICH_SILO}" "${WHICH_SOIL}"
+    fi
+else
+    echo "cannot incubate unsupported silo, can be cob or farm" && exit 1
+fi

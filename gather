@@ -2,8 +2,9 @@
 # Author: Shree Raj Shrestha
 # Date: 01/28/2025
 set -ueox pipefail
-source ./home
-source ./rake "${1}" "${2}"
+
+source "./home"
+source "${HUSK_HOME}/rake" "${1}" "${2}"
 
 function getSeed() {
     NEEDS=()

@@ -21,9 +21,10 @@ apt install podman git
 ```
 
 ## Workflow
-1. Collect the cob - compiles the cob and its dependencies to **.cob**
-2. Farm and collect the simulation payload to **.farm**
-3. Harvest the farmed payload into human friendly artifacts to **.harvest**
+1. Run *base* once - sets the home directory
+2. Collect the cob - compiles the cob and its dependencies to **.cob**
+3. Farm and collect the simulation payload to **.farm**
+4. Harvest the farmed payload into human friendly artifacts to **.harvest**
 
 ### An Example with SWIFT
 
@@ -35,12 +36,14 @@ https://github.com/SWIFTSIM/SWIFT
 
 For Fedora
 ```bash
+./base
 ./collect swiftsim.standalone.cob fedora.soil
 ./collect swiftsim.darkmatter.farm fedora.soil
 # WIP ./collect swiftsim.darkmatter.harvest fedora.soil
 ```
 For Ubuntu
 ```bash
+./base
 ./collect swiftsim.standalone.cob ubuntu.soil
 ./collect swiftsim.darkmatter.farm ubuntu.soil
 # WIP ./collect swiftsim.darkmatter.harvest ubuntu.soil

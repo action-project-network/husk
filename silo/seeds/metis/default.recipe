@@ -1,9 +1,9 @@
 STEPS=(
     "rm -rf GKlib"
-    "ln -s ${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/gklib ./GKlib"
+    "ln -s ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/gklib ./GKlib"
     "make config \
         cc=gcc \
-        prefix=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}"
+        prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}"
     "make -j12 all"
     "make install"
 )

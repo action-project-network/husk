@@ -1,5 +1,5 @@
 STEPS=(
-    "./configure --prefix=${SOIL_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}"
+    "./configure --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}"
     "make -j12"
     "make check"
     "make installcheck"

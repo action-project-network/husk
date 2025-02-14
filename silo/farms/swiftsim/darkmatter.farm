@@ -2,9 +2,9 @@
 # Author: Shree Raj Shrestha
 # Date: 02/12/2025
 set -ueox pipefail
-source ./home
-source ./rake "${1}" "${2}"
-echo $WHICH_FARM
+
+source "${HUSK_HOME}/home"
+source "${HUSK_HOME}/rake" "${1}" "${2}"
 mkdir -p "${WHICH_FARM}"
 cd "${WHICH_FARM}"
 tar -xvf "${SIMULATION}"

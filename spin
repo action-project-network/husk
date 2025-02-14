@@ -3,8 +3,9 @@
 # Date: 01/28/2025
 set -ueox pipefail
 
-source ./home
-source ./rake "${1}" "${2}"
+
+source "./home"
+source "${HUSK_HOME}/rake" "${1}" "${2}"
 SOIL_REQUIREMENTS="sh tar unzip"
 PIP_REQUIREMENTS=""
 source "$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"

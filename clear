@@ -3,16 +3,16 @@
 # Date: 02/06/2025
 set -ueox pipefail
 
-function removeContainer() {
-    podman container rm --force "${1}"
+function removePod() {
+    podman pod rm --force "${1}"
 }
 
-function removeStoppedContainers() {
-    podman container rm --force $(podman container ls --filter "status=exited" --format='{{.Names}}' | grep -e "soil") || true
+function removeStoppedPods() {
+    podman pod rm --force $(podman pod ls --filter "status=exited" --format='{{.Names}}' | grep -e "soil") || true
 }
 
-function removeAllContainers() {
-    podman container rm --force $(podman container ls --format='{{.Names}}' | grep -e "soil") || true
+function removeAllPods() {
+    podman pod rm --force $(podman pod ls --format='{{.Names}}' | grep -e "soil") || true
 }
 
 function removeImage() {
@@ -33,10 +33,6 @@ function removeAllCobs() {
     find "./silo/cobs" -name "*.cob" -type f -delete
     find "./silo/cobs" -name "*.soil" -type f -delete
     rm -rf "./.cob"
-}
-
-function removeNursery() {
-    rm -rf "./.nursery/${1}"
 }
 
 function removeAllSeeds() {
@@ -62,12 +58,12 @@ function removeAllHarvests() {
     rm -rf "./.harvest"
 }
 
-if [[ "${@}" =~ ^container' '.*$ ]]; then
-    removeContainer "${2}"
-elif [[ "${@}" =~ ^stopped' 'containers$ ]]; then
-    removeStoppedContainers
-elif [[ "${@}" =~ ^all' 'containers$ ]]; then
-    removeAllContainers
+if [[ "${@}" =~ ^pod' '.*$ ]]; then
+    removePod "${2}"
+elif [[ "${@}" =~ ^stopped' 'pods$ ]]; then
+    removeStoppedPods
+elif [[ "${@}" =~ ^all' 'pods$ ]]; then
+    removeAllPods
 elif [[ "${@}" =~ ^image' '.*$ ]]; then
     removeImage "${2}"
 elif [[ "${@}" =~ ^all' 'images$ ]]; then
@@ -83,14 +79,14 @@ elif [[ "${@}" =~ ^farm' '.*$ ]]; then
 elif [[ "${@}" =~ ^all' 'farms$ ]]; then
     removeAllFarms
 elif [[ "${@}" =~ ^all' 'soils$ ]]; then
-    removeAllContainers
+    removeAllPods
     removeAllImages
 elif [[ "${@}" =~ ^all' 'silos$ ]]; then
     removeAllFarms
     removeAllHarvests
     removeAllCobs
 elif [[ "${@}" =~ ^all$ ]]; then
-    removeAllContainers
+    removeAllPods
     removeAllImages
     removeAllSeeds
     removeAllCobs

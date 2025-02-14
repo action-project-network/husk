@@ -3,9 +3,10 @@
 # Date: 01/28/2025
 set -ueox pipefail
 
-source ./home
-source ./rake "${1}" "${2}"
+
+source "./home"
+source "${HUSK_HOME}/rake" "${1}" "${2}"
 podman container stop "${WHICH_POD}" || true
 podman commit "${WHICH_POD}" "${WHICH_POD}"
 podman container rm --force "${WHICH_POD}"
-podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${SOIL_HOME}":z -t "${WHICH_POD}" "$(which bash)"
+podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z -t "${WHICH_POD}" "$(which bash)"

@@ -4,15 +4,15 @@
 set -ueox pipefail
 source ./home
 source ./rake "${1}" "${2}"
-THIS_FARM="${HUSK_HOME}/${WHICH_FARM}.${WHICH_SOIL}"
-mkdir -p "${THIS_FARM}"
-cd "${THIS_FARM}"
+echo $WHICH_FARM
+mkdir -p "${WHICH_FARM}"
+cd "${WHICH_FARM}"
 tar -xvf "${SIMULATION}"
 printf "Restarts:\n\tdelta_hours: \t0.01\n" >> "${WHICH_SIMULATION}/${WHICH_PARAMETERS}"
 if [[ ! -e "${INITIAL_CONDITIONS}" ]]; then 
     /bin/bash -c "./${WHICH_SIMULATION}/getIC.sh"; 
 fi
-if [[ -z "$(ls -A "${THIS_FARM}/restart")" ]]; then 
+if [[ -z "$(ls -A "${WHICH_FARM}/restart")" ]]; then 
     /bin/bash -c "${EXECUTABLE} ${OPTIONS}"
 else
     /bin/bash -c "${EXECUTABLE} ${OPTIONS} --restart"

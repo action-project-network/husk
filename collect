@@ -3,12 +3,9 @@
 # Date: 02/09/2025
 set -ueox pipefail
 
-
 source "./home"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
 if [[ "${RAKE_PATH}" =~ .*cob$ ]]; then ./gather "${WHICH_SILO}" "${WHICH_SOIL}"; fi
-if [[ "${RAKE_PATH}" =~ .*cob$ ]] || [[ "${RAKE_PATH}" =~ .*farm$ ]] || [[ "${RAKE_PATH}" =~ .*harvest$ ]]; then 
-    ./spin "${WHICH_SILO}" "${WHICH_SOIL}"; 
-fi
+./spin "${WHICH_SILO}" "${WHICH_SOIL}"
 ./incubate "${WHICH_SILO}" "${WHICH_SOIL}"
-if [[ "${RAKE_PATH}" =~ .*cob$ ]] || [[ "${RAKE_PATH}" =~ .*harvest$ ]]; then ./peek "${WHICH_SILO}" "${WHICH_SOIL}"; fi
+./peek "${WHICH_SILO}" "${WHICH_SOIL}"

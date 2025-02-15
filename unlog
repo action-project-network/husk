@@ -1,8 +1,7 @@
 #!/bin/bash
 # Author: Shree Raj Shrestha
-# Date: 01/28/2025
+# Date: 02/15/2025
 set -ueox pipefail
-
 source "./home"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
-"$(which podman)" logs -f "${WHICH_POD}"
+tail -f ".log/${WHICH_POD}/${3}.log"

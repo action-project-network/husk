@@ -1,14 +1,17 @@
 #!/bin/bash
 # Author: Shree Raj Shrestha
-# Date: 02/14/2025
+# Date: 02/15/2025
 set -ueox pipefail
 
 source "${HUSK_HOME}/home"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
-eval "${4}"
 source "${3}"
-
+source "${4}"
+LOG_DIR="${HUSK_HOME}/${LOG_HOME}/${WHICH_POD}"
+mkdir -p "${LOG_DIR}"
+LOG="$(basename "$0").log"
+touch "${LOG_DIR}/${LOG}"
 cd "${5}"
 for STEP in "${STEPS[@]}"; 
-    do eval "${STEP}" 2>&1 | tee -a "${HUSK_HOME}/.${WHICH_POD}.log"
+    do eval "${STEP}" 2>&1 | tee -a "${LOG_DIR}/${LOG}"
 done

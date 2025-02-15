@@ -8,7 +8,7 @@ source "${HUSK_HOME}/rake" "${1}" "${2}"
 
 function getSeed() {
     NEEDS=()
-    WHICH_SEED="$(echo "${1}" | cut -d "_" -f 1)"
+    THIS_SEED="$(echo "${1}" | cut -d "_" -f 1)"
     source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 3).recipe" 
     for NEED in "${NEEDS[@]}"
     do
@@ -26,9 +26,9 @@ function getSeed() {
         REPO="${REPO_BASE%.*}"
         ARCHIVE_SEED=true
         if [ -e "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}" ]; then
-            tar -xzf "${REPO}.git"
+            "$(which tar)" -xzf "${REPO}.git"
             cd "${REPO}"
-            if [ $(git rev-parse HEAD) == "${COMMIT}" ]; then
+            if [ $("$(which git)" rev-parse HEAD) == "${COMMIT}" ]; then
                 echo "Seed is already cached, skipping download"
                 cd ..
                 rm -rf "${REPO}"
@@ -36,12 +36,12 @@ function getSeed() {
             fi
         fi
         if "${ARCHIVE_SEED}"; then 
-            rm -rf "${REPO}" && git clone "${URL}"
+            rm -rf "${REPO}" && "$(which git)" clone "${URL}"
             cd "${REPO}"
-            git reset --hard "${COMMIT}"
-            git submodule update --init --recursive
+            "$(which git)" reset --hard "${COMMIT}"
+            "$(which git)" submodule update --init --recursive
             cd ..
-            tar czf "${REPO}.git" "${REPO}" && rm -rf "${REPO}"
+            "$(which tar)" czf "${REPO}.git" "${REPO}" && rm -rf "${REPO}"
         fi
     else
         if [ -e "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}" ] \

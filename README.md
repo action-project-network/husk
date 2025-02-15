@@ -9,15 +9,16 @@
 ## Pre-Requisite
 1. Podman
 2. Git
+3. tar
 
 Fedora
 ```bash
-dnf install podman git
+dnf install podman git tar
 ```
 
 Ubuntu
 ```bash
-apt install podman git
+apt install podman git tar
 ```
 
 ## Workflow

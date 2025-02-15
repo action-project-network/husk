@@ -1,0 +1,4 @@
+WHICH_FARM="${HUSK_HOME}/${FARM_HOME}/swift.darkmatter.farm.fedora.soil"
+SOURCE="SWIFT"
+WHICH_SIMULATION="examples/SmallCosmoVolume/SmallCosmoVolume_DM"
+INCLUDE="statistics.txt"

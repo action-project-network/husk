@@ -1,0 +1,7 @@
+SIMULATION="${HUSK_HOME}/silo/seeds/swift/SWIFT.git"
+SOURCE="SWIFT"
+EXECUTABLE="${HUSK_HOME}/${COB_HOME}/swift.standalone.cob.fedora.soil/swift/bin/swift"
+INITIAL_CONDITIONS="small_cosmo_volume.hdf5"
+WHICH_SIMULATION="examples/SmallCosmoVolume/SmallCosmoVolume_DM"
+WHICH_PARAMETERS="small_cosmo_volume_dm.yml"
+OPTIONS="--cosmology --self-gravity --threads=16 ${SOURCE}/${WHICH_SIMULATION}/${WHICH_PARAMETERS}"

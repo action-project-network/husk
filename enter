@@ -3,7 +3,6 @@
 # Date: 01/28/2025
 set -ueox pipefail
 
-
 source "./home"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
-podman exec -it "${WHICH_POD}" "/bin/bash"
+"$(which podman)" exec -it "${WHICH_POD}" "/bin/bash"

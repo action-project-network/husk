@@ -1,5 +1,5 @@
 STEPS=(
-    "./configure --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED} \
+    "./configure --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED} \
         --with-zlib=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/zlib/ \
         --enable-shared=no \
         --enable-build-mode=production"

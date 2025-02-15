@@ -8,9 +8,9 @@ THIS_KERNEL="${3}"
 EPHEMERAL="${HOME}/.ephemeral/${RANDOM}"
 mkdir -p "${EPHEMERAL}"
 
-WHICH_SEED="$(echo "${THIS_KERNEL}" | cut -d "_" -f 1)"
-SEED_FILE="${HUSK_HOME}/silo/seeds/${WHICH_SEED}/$(echo "${THIS_KERNEL}" | cut -d "_" -f 2).seed"
-RECIPE_FILE="${HUSK_HOME}/silo/seeds/${WHICH_SEED}/$(echo "${THIS_KERNEL}" | cut -d "_" -f 3).recipe"
+THIS_SEED="$(echo "${THIS_KERNEL}" | cut -d "_" -f 1)"
+SEED_FILE="${HUSK_HOME}/silo/seeds/${THIS_SEED}/$(echo "${THIS_KERNEL}" | cut -d "_" -f 2).seed"
+RECIPE_FILE="${HUSK_HOME}/silo/seeds/${THIS_SEED}/$(echo "${THIS_KERNEL}" | cut -d "_" -f 3).recipe"
 
 source "${SEED_FILE}"
 ARCHIVE=$(echo "${URL##*/}")
@@ -28,5 +28,5 @@ case $(echo "${ARCHIVE##*.}") in
         exit 1 ;;
 esac
 
-"$(which bash)" "${HUSK_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}" "${RECIPE_FILE}" "WHICH_SEED=${WHICH_SEED}" "${EPHEMERAL}/${SOURCE}"
+"$(which bash)" "${HUSK_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}" "${SEED_FILE}" "${RECIPE_FILE}" "${EPHEMERAL}/${SOURCE}"
 rm -rf "${EPHEMERAL}"

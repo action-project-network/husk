@@ -2,7 +2,9 @@
 # Author: Shree Raj Shrestha
 # Date: 02/14/2025
 set -ueox pipefail
+
 COB_HOME=".cob"
 FARM_HOME=".farm"
 HARVEST_HOME=".harvest"
+LOG_HOME=".log"
 HUSK_HOME="/home/shree/workspace/husk"

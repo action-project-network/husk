@@ -1,0 +1,5 @@
+STEPS=(
+    "printf 'Restarts:\n\tdelta_hours: \t0.01\n' >> ${SOURCE}/${WHICH_SIMULATION}/${WHICH_PARAMETERS}"
+    "if [[ ! -e ${INITIAL_CONDITIONS} ]]; then ./${SOURCE}/${WHICH_SIMULATION}/getIC.sh; fi"
+    "if [[ -d ${WHICH_FIELD}/restart ]]; then ${EXECUTABLE} ${OPTIONS} --restart; else ${EXECUTABLE} ${OPTIONS}; fi"
+)

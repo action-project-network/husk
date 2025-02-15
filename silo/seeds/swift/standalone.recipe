@@ -1,7 +1,7 @@
 STEPS=(
     "./autogen.sh"
     "./configure \
-        --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED} \
+        --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED} \
         --with-hdf5=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/hdf5/bin/h5cc \
         --with-fftw=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/fftw \
         --with-metis=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/metis \

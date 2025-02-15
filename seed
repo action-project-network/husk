@@ -32,13 +32,13 @@ else
     ARCHIVE=$(basename "${URL}")
     case $(echo "${ARCHIVE##*.}") in
         "bz2")
-            tar -xf "${ARCHIVE}";;
+            "$(which tar)" -xf "${ARCHIVE}";;
         "gz")
-            tar -xzf "${ARCHIVE}";;
+            "$(which tar)" -xzf "${ARCHIVE}";;
         "zip")
-            unzip "${ARCHIVE}";;
+            "$(which unzip)" "${ARCHIVE}";;
         "git")
-            tar -xzf "${ARCHIVE}";;
+            "$(which tar)" -xzf "${ARCHIVE}";;
         *)
             exit 1 ;;
     esac

@@ -6,7 +6,7 @@ set -ueox pipefail
 
 source "./home"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
-podman container stop "${WHICH_POD}" || true
-podman commit "${WHICH_POD}" "${WHICH_POD}"
-podman container rm --force "${WHICH_POD}"
-podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z -t "${WHICH_POD}" "$(which bash)"
+"$(which podman)" container stop "${WHICH_POD}" || true
+"$(which podman)" commit "${WHICH_POD}" "${WHICH_POD}.revived"
+"$(which podman)" container rm --force "${WHICH_POD}.revived"
+"$(which podman)" run -d --name "${WHICH_POD}.revived" -v "${HUSK_HOME}":"${HUSK_HOME}":z -t "${WHICH_POD}.revived" "$(which bash)"

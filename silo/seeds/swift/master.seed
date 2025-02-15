@@ -1,0 +1,4 @@
+URL="https://github.com/SWIFTSIM/SWIFT.git"
+COMMIT="b585e17e01d6035cffa63d7b4a7604686ac02537"
+SOURCE="SWIFT"
+THIS_SEED="swift"

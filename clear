@@ -4,32 +4,32 @@
 set -ueox pipefail
 
 function removePod() {
-    podman container rm --force "${1}"
+    "$(which podman)" container rm --force "${1}"
 }
 
 function removeStoppedPods() {
-    podman container rm --force $(podman container ls --filter "status=exited" --format='{{.Names}}' | grep -e "soil") || true
+    "$(which podman)" container rm --force $("$(which podman)" container ls --filter "status=exited" --format='{{.Names}}' | grep -e "soil") || true
 }
 
 function removeAllPods() {
     removeStoppedPods
-    podman container rm --force $(podman container ls --format='{{.Names}}' | grep -e "soil") || true
+    "$(which podman)" container rm --force $("$(which podman)" container ls --format='{{.Names}}' | grep -e "soil") || true
 }
 
 function removeLog() {
-    find . -name "*${1}*" -type f -delete
+    rm -rf "${1}"
 }
 
 function removeAllLogs() {
-    find . -name "*log" -type f -delete
+    rm -rf "./.log"
 }
 
 function removeImage() {
-    podman image rm --force "${1}"
+    "$(which podman)" image rm --force "${1}"
 }
 
 function removeAllImages() {
-    podman image rm --force $(podman image ls --format='{{.Repository}}' | grep -e "soil") || true
+    "$(which podman)" image rm --force $("$(which podman)" image ls --format='{{.Repository}}' | grep -e "soil") || true
 }
 
 function removeCob() {
@@ -105,4 +105,5 @@ elif [[ "${@}" =~ ^all$ ]]; then
     removeAllCobs
     removeAllFarms
     removeAllHarvests
+    removeAllLogs
 fi

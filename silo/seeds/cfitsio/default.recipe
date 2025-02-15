@@ -2,7 +2,7 @@ STEPS=(
     "LDFLAGS=-L${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/swiftsim/standalone/cob/zlib/lib \
         CPPFLAGS=-I${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/swiftsim/standalone/cob/zlib/include \
         ./configure \
-        --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${WHICH_SEED}\
+        --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED}\
         --enable-static \
         --disable-shared"
     "make -j12"

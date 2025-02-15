@@ -1,0 +1,6 @@
+STEPS=(
+    "sed -i 's/swiftsimio.visualisation.smoothing_length_generation/swiftsimio.visualisation.smoothing_length.generate/g' ${WHICH_FARM}/${SOURCE}/${WHICH_SIMULATION}/plotProjection.py"
+    "cd ${WHICH_FARM} && for i in {1..31}; do python3 ${SOURCE}/${WHICH_SIMULATION}/plotProjection.py \${i}; done"
+    "cd ${WHICH_FARM} && ls | grep -e "snap.\*.png" | xargs -I {} mv {} ${WHICH_FIELD}"
+    "cd ${WHICH_FARM} && cp --force statistics.txt ${WHICH_FIELD}"
+)

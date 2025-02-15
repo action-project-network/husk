@@ -1,0 +1,16 @@
+#!/bin/bash
+# Author: Shree Raj Shrestha
+# Date: 02/14/2025
+set -ueox pipefail
+source "${HUSK_HOME}/home"
+source "${HUSK_HOME}/rake" "${1}" "${2}"
+source "${HUSK_HOME}/$(dirname "${RAKE_PATH}")/.plough"
+mkdir -p "${WHICH_FIELD}"
+if [[ "${WHICH_SILO}" =~ .*farm$ ]]; then
+    "$(which tar)" -xvf "${SIMULATION}" -C "${WHICH_FIELD}"
+fi
+if [[ "${WHICH_SILO}" =~ .*harvest$ ]]; then
+    source /root/.venv/bin/activate
+fi
+cd "${WHICH_FIELD}"
+"${HUSK_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}" "${HUSK_HOME}/$(dirname "${RAKE_PATH}")/.plough" "${HUSK_HOME}/${RAKE_PATH}" "${WHICH_FIELD}"

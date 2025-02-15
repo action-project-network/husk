@@ -14,7 +14,7 @@ function clear() {
 if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then
     ./clear pod "${WHICH_POD}"
     podman run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z -e HUSK_HOME="${HUSK_HOME}" -t "${WHICH_POD}" \
-        "$(which bash)" "${HUSK_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}"
+        "$(which bash)" "${HUSK_HOME}/uncob" "${WHICH_SILO}" "${WHICH_SOIL}"
 elif [[ "${WHICH_SILO}" =~ .*farm$ ]] || [[ "${WHICH_SILO}" =~ .*harvest$ ]]; then
     PREVIOUS_POD=$(podman container ls --filter "name=${WHICH_POD}" --format='{{.ID}}')
     if [[ -n "${PREVIOUS_POD}" ]]; then

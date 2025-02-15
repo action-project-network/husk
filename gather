@@ -36,10 +36,10 @@ function getSeed() {
             fi
         fi
         if "${ARCHIVE_SEED}"; then 
-            rm -rf "${REPO}" && git clone --depth=1 "${URL}"
+            rm -rf "${REPO}" && git clone "${URL}"
             cd "${REPO}"
             git reset --hard "${COMMIT}"
-            git submodule update --init --recursive --depth 1
+            git submodule update --init --recursive
             cd ..
             tar czf "${REPO}.git" "${REPO}" && rm -rf "${REPO}"
         fi

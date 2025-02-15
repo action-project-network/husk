@@ -4,15 +4,24 @@
 set -ueox pipefail
 
 function removePod() {
-    podman pod rm --force "${1}"
+    podman container rm --force "${1}"
 }
 
 function removeStoppedPods() {
-    podman pod rm --force $(podman pod ls --filter "status=exited" --format='{{.Names}}' | grep -e "soil") || true
+    podman container rm --force $(podman container ls --filter "status=exited" --format='{{.Names}}' | grep -e "soil") || true
 }
 
 function removeAllPods() {
-    podman pod rm --force $(podman pod ls --format='{{.Names}}' | grep -e "soil") || true
+    removeStoppedPods
+    podman container rm --force $(podman container ls --format='{{.Names}}' | grep -e "soil") || true
+}
+
+function removeLog() {
+    find . -name "*${1}*" -type f -delete
+}
+
+function removeAllLogs() {
+    find . -name "*log" -type f -delete
 }
 
 function removeImage() {
@@ -64,6 +73,10 @@ elif [[ "${@}" =~ ^stopped' 'pods$ ]]; then
     removeStoppedPods
 elif [[ "${@}" =~ ^all' 'pods$ ]]; then
     removeAllPods
+elif [[ "${@}" =~ ^log' '.*$ ]]; then
+    removeLog "${2}"
+elif [[ "${@}" =~ ^all' 'logs$ ]]; then
+    removeAllLogs
 elif [[ "${@}" =~ ^image' '.*$ ]]; then
     removeImage "${2}"
 elif [[ "${@}" =~ ^all' 'images$ ]]; then

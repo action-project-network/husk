@@ -2,15 +2,19 @@
 # Author: Shree Raj Shrestha
 # Date: 01/20/2025
 set -ueox pipefail
-source ${HUSK_HOME}/home
-
-WHICH_POD="${2}"
-EPHEMERAL=${HOME}/ephemeral/${RANDOM}
+source "${HUSK_HOME}/home"
+source "${HUSK_HOME}/rake" "${1}" "${2}"
+THIS_KERNEL="${3}"
+EPHEMERAL="${HOME}/.ephemeral/${RANDOM}"
 mkdir -p "${EPHEMERAL}"
 
-source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 2).seed"
+WHICH_SEED="$(echo "${THIS_KERNEL}" | cut -d "_" -f 1)"
+SEED_FILE="${HUSK_HOME}/silo/seeds/${WHICH_SEED}/$(echo "${THIS_KERNEL}" | cut -d "_" -f 2).seed"
+RECIPE_FILE="${HUSK_HOME}/silo/seeds/${WHICH_SEED}/$(echo "${THIS_KERNEL}" | cut -d "_" -f 3).recipe"
+
+source "${SEED_FILE}"
 ARCHIVE=$(echo "${URL##*/}")
-cd "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/"
+cd "$(dirname "${SEED_FILE}")"
 case $(echo "${ARCHIVE##*.}") in
     "bz2")
         tar -xvf "${ARCHIVE}" -C "${EPHEMERAL}";;
@@ -24,8 +28,5 @@ case $(echo "${ARCHIVE##*.}") in
         exit 1 ;;
 esac
 
-WHICH_SEED="$(echo "${1}" | cut -d "_" -f 1)"
-source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 3).recipe"
-cd "${EPHEMERAL}/${SOURCE}"
-for STEP in "${STEPS[@]}"; do eval "${STEP}"; done
+"$(which bash)" "${HUSK_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}" "${RECIPE_FILE}" "WHICH_SEED=${WHICH_SEED}" "${EPHEMERAL}/${SOURCE}"
 rm -rf "${EPHEMERAL}"

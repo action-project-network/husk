@@ -22,7 +22,7 @@ touch "${NEW_SEED_VERSION}"
 SOURCE=""
 CHECKSUM=""
 if [[ $URL =~ .*.git$ ]]; then
-    git clone "${URL}" --depth=1
+    git clone "${URL}"
     SOURCE=$(echo $(find ./ -maxdepth 1 -type d -printf "%f~" | cut -d "~" -f 2))
     cd "${SOURCE}"
     COMMIT=$(git rev-parse HEAD)

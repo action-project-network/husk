@@ -40,12 +40,12 @@ For Fedora
 ./base
 ./collect swiftsim.standalone.cob fedora.soil
 ./collect swiftsim.darkmatter.farm fedora.soil
-# WIP ./collect swiftsim.darkmatter.harvest fedora.soil
+./collect swiftsim.darkmatter.harvest fedora.soil
 ```
 For Ubuntu
 ```bash
 ./base
 ./collect swiftsim.standalone.cob ubuntu.soil
 ./collect swiftsim.darkmatter.farm ubuntu.soil
-# WIP ./collect swiftsim.darkmatter.harvest ubuntu.soil
+./collect swiftsim.darkmatter.harvest ubuntu.soil
 ```

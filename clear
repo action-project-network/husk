@@ -17,11 +17,11 @@ function removeAllPods() {
 }
 
 function removeLog() {
-    rm -rf "${1}"
+    rm -rf "./.log/${1}"
 }
 
 function removeAllLogs() {
-    rm -rf "./.log"
+    rm -rf "./.log/*"
 }
 
 function removeImage() {
@@ -33,22 +33,22 @@ function removeAllImages() {
 }
 
 function removeCob() {
-    find "./silo/cobs/${1}" -name "*.cob" -type f -delete
-    find "./silo/cobs/${1}" -name "*.soil" -type f -delete
+    find "./silo/cobs/" -name "*${1}.cob" -type f -delete
+    find "./silo/cobs" -name "*${1}.soil" -type f -delete
     rm -rf "./.cob/${1}"
 }
 
 function removeAllCobs() {
     find "./silo/cobs" -name "*.cob" -type f -delete
     find "./silo/cobs" -name "*.soil" -type f -delete
-    rm -rf "./.cob"
+    rm -rf "./.cob/*"
 }
 
 function removeAllSeeds() {
-    find . -name "*.tar.bz2" -type f -delete
-    find . -name "*.tar.gz" -type f -delete
-    find . -name "*.zip" -type f -delete
-    find . -name "*.git" -type f -delete
+    find "./silo" -name "*.tar.bz2" -type f -delete
+    find "./silo" -name "*.tar.gz" -type f -delete
+    find "./silo" -name "*.zip" -type f -delete
+    find "./silo" -name "*.git" -type f -delete
 }
 
 function removeFarm() {
@@ -56,7 +56,7 @@ function removeFarm() {
 }
 
 function removeAllFarms() {
-    rm -rf "./.farm"
+    rm -rf "./.farm/*"
 }
 
 function removeHarvest() {
@@ -64,7 +64,7 @@ function removeHarvest() {
 }
 
 function removeAllHarvests() {
-    rm -rf "./.harvest"
+    rm -rf "./.harvest/*"
 }
 
 if [[ "${@}" =~ ^pod' '.*$ ]]; then

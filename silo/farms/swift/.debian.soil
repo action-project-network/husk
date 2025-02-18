@@ -1,0 +1,2 @@
+SOIL_REQUIREMENTS="which wget libgomp1"
+PIP_REQUIREMENTS=""

@@ -1,4 +1,4 @@
-FROM ubuntu:noble
+FROM dtcooper/raspberrypi-os:bookworm
 ARG SOIL_REQUIREMENTS
 ARG PIP_REQUIREMENTS
 RUN apt update

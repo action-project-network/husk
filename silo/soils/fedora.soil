@@ -1,4 +1,4 @@
-FROM fedora
+FROM fedora:41
 ARG SOIL_REQUIREMENTS
 ARG PIP_REQUIREMENTS
 RUN /bin/bash -c 'if [[ -n $SOIL_REQUIREMENTS ]]; then dnf install -y $SOIL_REQUIREMENTS; fi'

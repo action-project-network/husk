@@ -1,0 +1,1 @@
+REQUIREMENTS=(gcc autoconf automake libtool)

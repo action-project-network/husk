@@ -1,4 +1,4 @@
-FROM ubuntu:noble
+FROM debian:trixie
 ARG SOIL_REQUIREMENTS
 ARG PIP_REQUIREMENTS
 RUN apt update

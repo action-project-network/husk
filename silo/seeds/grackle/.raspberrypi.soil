@@ -1,1 +1,0 @@
-REQUIREMENTS=(gcc gfortran autoconf automake libtool)

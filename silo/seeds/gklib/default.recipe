@@ -1,4 +1,0 @@
-STEPS=(
-    "mkdir -p ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED}"
-    "cp -R * ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED}"
-)

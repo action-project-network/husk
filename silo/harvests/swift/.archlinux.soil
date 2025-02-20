@@ -1,2 +1,0 @@
-SOIL_REQUIREMENTS="texlive-packages"
-PIP_REQUIREMENTS="matplotlib==3.10.0 swiftsimio==9.0.2 scipy==1.15.1 pylatex==1.4.2"

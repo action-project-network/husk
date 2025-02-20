@@ -6,3 +6,4 @@
 /silo/cobs/**/.*
 /silo/cobs/**/*.cob
 home
+**/.DS_Store

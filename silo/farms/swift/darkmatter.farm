@@ -1,5 +1,7 @@
 STEPS=(
-    "printf 'Restarts:\n\tdelta_hours: \t0.01\n' >> ${SOURCE}/${WHICH_SIMULATION}/${WHICH_PARAMETERS}"
-    "if [[ ! -e ${INITIAL_CONDITIONS} ]]; then ./${SOURCE}/${WHICH_SIMULATION}/getIC.sh; fi"
+    "$(which tar) -xvf "${REPOSITORY}" -C /tmp"
+    "cp -rf /tmp/${SOURCE}/${WHICH_SIMULATION}/* ./"
+    "printf 'Restarts:\n\tdelta_hours: \t0.01\n' >> ./${WHICH_PARAMETERS}"
+    "if [[ ! -e ${INITIAL_CONDITIONS} ]]; then ./getIC.sh; fi"
     "if [[ -d ${WHICH_FIELD}/restart ]]; then ${EXECUTABLE} ${OPTIONS} --restart; else ${EXECUTABLE} ${OPTIONS}; fi"
 )

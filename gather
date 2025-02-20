@@ -1,21 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 # Author: Shree Raj Shrestha
-# Date: 01/28/2025
+# Date: 02/20/2025
 set -ueox pipefail
-
-source "./home"
+source "./.husk"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
+EPHEMERAL="${HOME}/.ephemeral/${RANDOM}"
+mkdir -p "${EPHEMERAL}"
 
 function getSeed() {
-    NEEDS=()
+    NEEDS=""
     THIS_SEED="$(echo "${1}" | cut -d "_" -f 1)"
-    source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 3).recipe" 
-    for NEED in "${NEEDS[@]}"
-    do
-        if [[ ! "${COB_RESOLVED[@]}" =~ ${NEED} ]]; then
-            getSeed "${NEED}"
-        fi
-    done
+    source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 3).recipe"
+    if [[ ! -z "${NEEDS}" ]]; then
+        for NEED in "${NEEDS[@]}"
+        do
+            if [[ ! "${COB_RESOLVED}" =~ ${NEED} ]]; then
+                getSeed "${NEED}"
+            fi
+        done
+    fi
 
     source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/$(echo "${1}" | cut -d "_" -f 2).seed"
     cd "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)"
@@ -25,23 +28,26 @@ function getSeed() {
         REPO_BASE=$(basename "${URL}")
         REPO="${REPO_BASE%.*}"
         ARCHIVE_SEED=true
+        THIS_SEED_HOME="$(pwd)"
         if [ -e "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}" ]; then
-            "$(which tar)" -xzf "${REPO}.git"
-            cd "${REPO}"
+            "$(which tar)" -xzf "${REPO}.git" -C "${EPHEMERAL}"
+            cd "${EPHEMERAL}/${REPO}"
             if [ $("$(which git)" rev-parse HEAD) == "${COMMIT}" ]; then
                 echo "Seed is already cached, skipping download"
                 cd ..
                 rm -rf "${REPO}"
                 ARCHIVE_SEED=false
             fi
+            cd "${THIS_SEED_HOME}"
         fi
         if "${ARCHIVE_SEED}"; then 
-            rm -rf "${REPO}" && "$(which git)" clone "${URL}"
-            cd "${REPO}"
+            "$(which git)" clone "${URL}" "${EPHEMERAL}/${REPO}"
+            cd "${EPHEMERAL}/${REPO}"
             "$(which git)" reset --hard "${COMMIT}"
             "$(which git)" submodule update --init --recursive
             cd ..
-            "$(which tar)" czf "${REPO}.git" "${REPO}" && rm -rf "${REPO}"
+            "$(which tar)" czf "${THIS_SEED_HOME}/${REPO}.git" "${REPO}"
+            cd "${THIS_SEED_HOME}"
         fi
     else
         if [ -e "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}" ] \
@@ -68,26 +74,28 @@ function getSeed() {
             fi
         fi
     done
-    if [[ ! "${COB_RESOLVED[@]}" =~ ${1} ]]; then
-        COB_RESOLVED+=($1)
+    if [[ ! "${COB_RESOLVED}" =~ ${1} ]]; then
+        if [[ ! -z "${COB_RESOLVED}" ]]; then
+            COB_RESOLVED="${COB_RESOLVED} ${1}"
+        else
+            COB_RESOLVED="${1}"
+        fi
     fi
 }
 
 source "${HUSK_HOME}/${RAKE_PATH}.husk"
-COB_RESOLVED=()
+COB_RESOLVED=""
 SOIL_REQUIREMENTS="which bash zip tar"
 for SEED in "${COB[@]}"
 do
     getSeed "${SEED}"
 done
+
 rm -rf "${HUSK_HOME}/${RAKE_PATH}"
 touch "${HUSK_HOME}/${RAKE_PATH}"
-sed -i '/COB/d' "${HUSK_HOME}/${RAKE_PATH}"
-echo -n "COB=(${COB_RESOLVED[@]})" >> "${HUSK_HOME}/${RAKE_PATH}"
-sed -i '/^[[:space:]]*$/d' "${HUSK_HOME}/${RAKE_PATH}"
+printf "COB=(${COB_RESOLVED[@]})" >> "${HUSK_HOME}/${RAKE_PATH}"
 
 rm -rf "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
 touch "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
-sed -i '/SOIL_REQUIREMENTS/d' "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
-printf "\nSOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS}\"" >> "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
-sed -i '/^[[:space:]]*$/d' "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
+printf "SOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS}\"" >> "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
+rm -rf "${EPHEMERAL}"

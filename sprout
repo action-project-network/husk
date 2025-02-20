@@ -2,7 +2,6 @@
 # Author: Shree Raj Shrestha
 # Date: 01/20/2025
 set -ueox pipefail
-source "${HUSK_HOME}/home"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
 THIS_KERNEL="${3}"
 EPHEMERAL="${HOME}/.ephemeral/${RANDOM}"

@@ -1,7 +1,11 @@
 FROM fedora:41
 ARG SOIL_REQUIREMENTS
 ARG PIP_REQUIREMENTS
+ARG USER
 RUN /bin/bash -c 'if [[ -n $SOIL_REQUIREMENTS ]]; then dnf install -y $SOIL_REQUIREMENTS; fi'
 RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then dnf install -y python3 pip; fi'
-RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then python3 -m venv /root/.venv/; fi'
-RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then source /root/.venv/bin/activate && pip install $PIP_REQUIREMENTS; fi'
+RUN groupadd $USER
+RUN useradd -m -g $USER $USER
+USER $USER
+RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then python3 -m venv /home/$USER/.venv/; fi'
+RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then source /home/$USER/.venv/bin/activate && pip install $PIP_REQUIREMENTS; fi'

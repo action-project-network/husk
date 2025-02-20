@@ -2,6 +2,7 @@
 # Author: Shree Raj Shrestha
 # Date: 02/09/2025
 set -ueox pipefail
+source "${HUSK_HOME}/home"
 WHICH_SILO="${1}"
 RAKE_PATH="${1//.//}"
 if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then

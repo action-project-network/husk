@@ -2,8 +2,7 @@
 # Author: Shree Raj Shrestha
 # Date: 01/28/2025
 set -ueox pipefail
-
-source "./home"
+source "./.husk"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
 
 function clear() {
@@ -13,16 +12,21 @@ function clear() {
 
 if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then
     ./clear pod "${WHICH_POD}"
-    "$(which podman)" run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z -e HUSK_HOME="${HUSK_HOME}" -t "${WHICH_POD}" \
-        "$(which bash)" "${HUSK_HOME}/uncob" "${WHICH_SILO}" "${WHICH_SOIL}"
+
+    "$(which podman)" run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z \
+        -e HUSK_HOME="${HUSK_HOME}" --workdir="${HUSK_HOME}" --user "$(whoami)" \
+        -t "${WHICH_POD}" "$(which bash)" "${HUSK_HOME}/uncob" "${WHICH_SILO}" "${WHICH_SOIL}"
+
 elif [[ "${WHICH_SILO}" =~ .*farm$ ]] || [[ "${WHICH_SILO}" =~ .*harvest$ ]]; then
     PREVIOUS_POD=$("$(which podman)" container ls --filter "name=${WHICH_POD}" --format='{{.ID}}')
     if [[ -n "${PREVIOUS_POD}" ]]; then
         "$(which podman)" start "${PREVIOUS_POD}"
     else
         ./clear pod "${WHICH_POD}"
-        "$(which podman)" run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z -e HUSK_HOME="${HUSK_HOME}" -t "${WHICH_POD}" \
-            "$(which bash)" "${HUSK_HOME}/plough" "${WHICH_SILO}" "${WHICH_SOIL}"
+        
+        "$(which podman)" run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z \
+            -e HUSK_HOME="${HUSK_HOME}" --workdir="${HUSK_HOME}" --user "$(whoami)" \
+            -t "${WHICH_POD}" "$(which bash)" "${HUSK_HOME}/plough" "${WHICH_SILO}" "${WHICH_SOIL}"
     fi
 else
     echo "cannot incubate unsupported silo, can be cob or farm" && exit 1

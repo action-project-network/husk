@@ -2,11 +2,10 @@
 # Author: Shree Raj Shrestha
 # Date: 01/28/2025
 set -ueox pipefail
-
-
-source "./home"
+source "./.husk"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
 "$(which podman)" container stop "${WHICH_POD}" || true
 "$(which podman)" commit "${WHICH_POD}" "${WHICH_POD}.revived"
 "$(which podman)" container rm --force "${WHICH_POD}.revived"
-"$(which podman)" run -d --name "${WHICH_POD}.revived" -v "${HUSK_HOME}":"${HUSK_HOME}":z -t "${WHICH_POD}.revived" "$(which bash)"
+"$(which podman)" run -d --name "${WHICH_POD}.revived" -v "${HUSK_HOME}":"${HUSK_HOME}":z \
+     --workdir="${HUSK_HOME}" --user "$(whoami)" -t "${WHICH_POD}.revived" "$(which bash)"

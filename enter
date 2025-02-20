@@ -2,7 +2,6 @@
 # Author: Shree Raj Shrestha
 # Date: 01/28/2025
 set -ueox pipefail
-
-source "./home"
+source "./.husk"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
 "$(which podman)" exec -it "${WHICH_POD}" "/bin/bash"

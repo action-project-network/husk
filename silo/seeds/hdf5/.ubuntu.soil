@@ -1,1 +1,1 @@
-REQUIREMENTS=(gcc g++ autoconf automake build-essential)
+REQUIREMENTS=(gcc g++ autoconf automake diff)

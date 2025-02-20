@@ -11,15 +11,34 @@
 2. Git
 3. tar
 
-Fedora
+### RHEL flavors
 ```bash
 dnf install podman git tar
 ```
 
-Ubuntu
+### Debian Flavors
 ```bash
 apt install podman git tar
 ```
+
+### MacOS
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+echo >> /Users/$(whoami)/.zprofile
+echo 'eval "$(/usr/local/bin/brew shelling)"' >> /Users/$(whoami)/.zprofile
+eval "$(/usr/local/bin/brew shellenv)"
+
+brew install podman
+brew install podman-desktop
+podman machine init
+podman machine start
+ 
+brew install git
+brew install gnu-tar
+```
+
 
 ## Workflow
 1. Run *base* once - sets the home directory

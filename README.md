@@ -38,14 +38,14 @@ https://github.com/SWIFTSIM/SWIFT
 For Fedora
 ```bash
 ./base
-./collect swiftsim.standalone.cob fedora.soil
-./collect swiftsim.darkmatter.farm fedora.soil
-./collect swiftsim.darkmatter.harvest fedora.soil
+./collect swift.standalone.cob fedora.soil
+./collect swift.darkmatter.farm fedora.soil
+./collect swift.darkmatter.harvest fedora.soil
 ```
 For Ubuntu
 ```bash
 ./base
-./collect swiftsim.standalone.cob ubuntu.soil
-./collect swiftsim.darkmatter.farm ubuntu.soil
-./collect swiftsim.darkmatter.harvest ubuntu.soil
+./collect swift.standalone.cob ubuntu.soil
+./collect swift.darkmatter.farm ubuntu.soil
+./collect swift.darkmatter.harvest ubuntu.soil
 ```

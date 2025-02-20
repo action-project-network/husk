@@ -6,10 +6,10 @@ source "./.husk"
 WHICH_SOIL="${1}"
 WHICH_SILO="empty.cob"
 WHICH_POD="${WHICH_SILO}.${WHICH_SOIL}"
-USER="${2}"
+USER="${2/.user/}"
 ./clear image "${WHICH_POD}"
 "$(which podman)" build -t "${WHICH_POD}" -f "./silo/soils/${WHICH_SOIL}" .\
-    --build-arg USER="$(whoami)" --build-arg SOIL_REQUIREMENTS="which bash zip tar git"
+    --build-arg USER="${USER}" --build-arg SOIL_REQUIREMENTS="which bash zip tar git"
 ./clear pod "${WHICH_POD}"
 "$(which podman)" run --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z \
     --workdir="${HUSK_HOME}" --user "${USER}" -it "${WHICH_POD}" "/bin/bash"

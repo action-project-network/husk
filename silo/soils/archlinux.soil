@@ -1,10 +1,9 @@
-FROM dtcooper/raspberrypi-os:bookworm
+FROM archlinux:base-20250216.0.309127
 ARG SOIL_REQUIREMENTS
 ARG PIP_REQUIREMENTS
 ARG USER
-RUN apt update
-RUN /bin/bash -c 'if [[ -n $SOIL_REQUIREMENTS ]]; then apt install -y $SOIL_REQUIREMENTS; fi'
-RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then apt install -y python3 python3-venv pip; fi'
+RUN /bin/bash -c 'if [[ -n $SOIL_REQUIREMENTS ]]; then pacman -Sy $SOIL_REQUIREMENTS --noconfirm; fi'
+RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then pacman -Sy python3 python3-venv pip --noconfirm; fi'
 RUN /bin/bash -c 'if [[ ! $USER =~ ^root$ ]]; then groupadd $USER; fi'
 RUN /bin/bash -c 'if [[ ! $USER =~ ^root$ ]]; then useradd -m -g $USER $USER; fi'
 USER $USER

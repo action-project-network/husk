@@ -7,6 +7,16 @@ source "${HUSK_HOME}/rake" "${1}" "${2}"
 EPHEMERAL="${HOME}/.ephemeral/${RANDOM}"
 mkdir -p "${EPHEMERAL}"
 
+function isChecksumValid() {
+    MATCH_CHECKSUM="${2}"
+    FILE_CHECKSUM=$(sha256sum "${1}"| cut -d " " -f 1)
+    if [[ $FILE_CHECKSUM == $MATCH_CHECKSUM ]]; then 
+        return 0
+    else
+        return 1
+    fi
+}
+
 function getSeed() {
     NEEDS=""
     THIS_SEED="$(echo "${1}" | cut -d "_" -f 1)"
@@ -29,7 +39,7 @@ function getSeed() {
         REPO="${REPO_BASE%.*}"
         ARCHIVE_SEED=true
         THIS_SEED_HOME="$(pwd)"
-        if [ -e "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}" ]; then
+        if [[ -e "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}" ]]; then
             "$(which tar)" -xzf "${REPO}.git" -C "${EPHEMERAL}"
             cd "${EPHEMERAL}/${REPO}"
             if [ $("$(which git)" rev-parse HEAD) == "${COMMIT}" ]; then
@@ -50,12 +60,14 @@ function getSeed() {
             cd "${THIS_SEED_HOME}"
         fi
     else
-        if [ -e "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}" ] \
-            && $(echo "${CHECKSUM} $(echo "${URL##*/}")" | sha256sum --check --status); then
+        CACHED_SEED="${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/${ARCHIVE}"
+        if [[ -e "${CACHED_SEED}" ]] && $(isChecksumValid "${CACHED_SEED}" "${CHECKSUM}"); then
             echo "Seed is already cached, skipping download"
         else
             curl -LO "${URL}"
-            echo "${CHECKSUM} $(echo "${URL##*/}")" | sha256sum --check --status
+            if ! $(isChecksumValid "${CACHED_SEED}" "${CHECKSUM}"); then
+                exit 1
+            fi
         fi
     fi
 

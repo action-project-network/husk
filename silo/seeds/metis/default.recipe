@@ -4,7 +4,7 @@ STEPS=(
     "make config \
         cc=gcc \
         prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED}"
-    "make -j12 all"
+    "make -j4 all"
     "make install"
 )
 NEEDS=(gklib_5.1.1_default)

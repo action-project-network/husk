@@ -8,7 +8,7 @@ STEPS=(
         --with-gsl=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/gsl \
         --with-numa=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/numa \
         --with-jemalloc=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/jemalloc"
-    "make -j12 all"
+    "make -j4 all"
     "make install"
 )
 NEEDS=(

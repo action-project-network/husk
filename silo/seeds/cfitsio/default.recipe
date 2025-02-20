@@ -5,7 +5,7 @@ STEPS=(
         --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED}\
         --enable-static \
         --disable-shared"
-    "make -j12"
+    "make -j4"
     "make testprog"
     "./testprog > testprog.lis"
     "if ! diff -q testprog.lis testprog.out &>/dev/null; then >&2 exit 1; fi"

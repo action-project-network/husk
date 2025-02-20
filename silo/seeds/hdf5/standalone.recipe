@@ -3,7 +3,7 @@ STEPS=(
         --with-zlib=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/zlib/ \
         --enable-shared=no \
         --enable-build-mode=production"
-    "make -j12"
+    "make -j4"
     "make check"
     "make install"
     "make check-install"

@@ -11,7 +11,7 @@ STEPS=(
         --with-grackle=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/grackle \
         --with-chealpix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/healpix \
         --with-cfitsio=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/cfitsio"
-    "make -j12 all"
+    "make -j4 all"
     "make install"
 )
 NEEDS=(

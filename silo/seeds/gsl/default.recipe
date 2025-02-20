@@ -6,7 +6,7 @@ STEPS=(
     "autoconf"
     "./autogen.sh"
     "./configure --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED} --enable-shared=no"
-    "make -j12"
+    "make -j4"
     "make check"
     "make install"
     "make installcheck"

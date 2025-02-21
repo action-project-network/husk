@@ -1,1 +1,1 @@
-REQUIREMENTS=(gcc cmake)
+SOIL_REQUIREMENTS=(gcc cmake)

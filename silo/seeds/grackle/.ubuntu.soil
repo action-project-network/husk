@@ -1,1 +1,1 @@
-REQUIREMENTS=(gcc gfortran autoconf automake libtool)
+SOIL_REQUIREMENTS=(gcc gfortran autoconf automake libtool)

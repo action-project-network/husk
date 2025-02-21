@@ -72,17 +72,31 @@ function getSeed() {
     fi
 
     cd "${HUSK_HOME}"
+    TAP_REQUIREMENTS=""
     source "${HUSK_HOME}/silo/seeds/$(echo "${1}" | cut -d "_" -f 1)/.${WHICH_SOIL}" 
-    for REQUIREMENT in "${REQUIREMENTS[@]}"
+    for SOIL_REQUIREMENT in "${SOIL_REQUIREMENTS[@]}"
     do
-        if [[ "${REQUIREMENT}" =~ .*:.* ]]; then
-            REQUIREMENT=$(echo "${REQUIREMENT}" |  cut -d ":" -f 1)
+        if [[ "${SOIL_REQUIREMENT}" =~ .*:.* ]]; then
+            SOIL_REQUIREMENT=$(echo "${SOIL_REQUIREMENT}" |  cut -d ":" -f 1)
         fi
-        if [[ ! "${SOIL_REQUIREMENTS}" =~ "${REQUIREMENT}" ]]; then
-            if [[ -z "${SOIL_REQUIREMENTS}" ]]; then
-                SOIL_REQUIREMENTS="${REQUIREMENT}"
+        if [[ ! "${SOIL_REQUIREMENTS_RESOLVED}" =~ "${SOIL_REQUIREMENT}" ]] && [[ -n "${SOIL_REQUIREMENT}" ]]; then
+            if [[ -z "${SOIL_REQUIREMENTS_RESOLVED}" ]]; then
+                SOIL_REQUIREMENTS_RESOLVED="${SOIL_REQUIREMENT}"
             else
-                SOIL_REQUIREMENTS="${SOIL_REQUIREMENTS} ${REQUIREMENT}"
+                SOIL_REQUIREMENTS_RESOLVED="${SOIL_REQUIREMENTS_RESOLVED} ${SOIL_REQUIREMENT}"
+            fi
+        fi
+    done
+    for TAP_REQUIREMENT in "${TAP_REQUIREMENTS[@]}"
+    do
+        if [[ "${TAP_REQUIREMENT}" =~ .*:.* ]]; then
+            TAP_REQUIREMENT=$(echo "${TAP_REQUIREMENT}" |  cut -d ":" -f 1)
+        fi
+        if [[ ! "${TAP_REQUIREMENTS_RESOLVED}" =~ "${TAP_REQUIREMENT}" ]] && [[ -n "${TAP_REQUIREMENT}" ]]; then
+            if [[ -z "${TAP_REQUIREMENTS_RESOLVED}" ]]; then
+                TAP_REQUIREMENTS_RESOLVED="${TAP_REQUIREMENT}"
+            else
+                TAP_REQUIREMENTS_RESOLVED="${TAP_REQUIREMENTS_RESOLVED} ${TAP_REQUIREMENT}"
             fi
         fi
     done
@@ -97,7 +111,8 @@ function getSeed() {
 
 source "${HUSK_HOME}/${RAKE_PATH}.husk"
 COB_RESOLVED=""
-SOIL_REQUIREMENTS="which bash zip tar"
+SOIL_REQUIREMENTS_RESOLVED="which bash zip tar"
+TAP_REQUIREMENTS_RESOLVED=""
 for SEED in "${COB[@]}"
 do
     getSeed "${SEED}"
@@ -109,5 +124,8 @@ printf "COB=(${COB_RESOLVED[@]})" >> "${HUSK_HOME}/${RAKE_PATH}"
 
 rm -rf "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
 touch "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
-printf "SOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS}\"" >> "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
+printf "SOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS_RESOLVED}\"" >> "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
+if [[ -n "${TAP_REQUIREMENTS_RESOLVED}" ]]; then
+    printf "\nTAP_REQUIREMENTS=\"${TAP_REQUIREMENTS_RESOLVED}\"" >> "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
+fi
 rm -rf "${EPHEMERAL}"

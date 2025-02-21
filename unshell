@@ -10,6 +10,9 @@ mkdir -p "${LOG_DIR}"
 LOG="$(basename "$0").log"
 touch "${LOG_DIR}/${LOG}"
 cd "${5}"
+if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+    eval $("/home/linuxbrew/.linuxbrew/bin/brew" shellenv)
+fi
 for STEP in "${STEPS[@]}"; 
     do eval "${STEP}" 2>&1 | tee -a "${LOG_DIR}/${LOG}"
 done

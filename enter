@@ -4,4 +4,6 @@
 set -ueox pipefail
 source "./.husk"
 source "${HUSK_HOME}/rake" "${1}" "${2}"
-"$(which podman)" exec -it "${WHICH_POD}" "/bin/bash"
+WHICH_FARMER="${3}"
+[[ "${WHICH_FARMER}" =~ .*.farmer$ ]] && WHICH_FARMER="${3/.farmer/}" || WHICH_FARMER="root"
+"$(which podman)" exec --user "${WHICH_FARMER}" -it "${WHICH_POD}" "/bin/bash"

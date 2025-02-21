@@ -1,1 +1,1 @@
-REQUIREMENTS=(gcc make diff)
+SOIL_REQUIREMENTS=(gcc make diff)

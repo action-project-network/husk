@@ -1,1 +1,1 @@
-REQUIREMENTS=(gcc make diffutils)
+SOIL_REQUIREMENTS=(gcc make diffutils)

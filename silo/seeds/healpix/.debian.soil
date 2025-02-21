@@ -1,1 +1,1 @@
-REQUIREMENTS=(gcc make gfortran)
+SOIL_REQUIREMENTS=(gcc make gfortran)

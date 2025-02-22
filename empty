@@ -10,7 +10,7 @@ WHICH_FARMER="${2}"
 [[ "${WHICH_FARMER}" =~ .*.farmer$ ]] && WHICH_FARMER="${2/.farmer/}" || WHICH_FARMER="root"
 ./clear image "${WHICH_POD}"
 "$(which podman)" build --no-cache -t "${WHICH_POD}" -f "./silo/soils/${WHICH_SOIL}" . \
-    --build-arg WHICH_FARMER="${WHICH_FARMER}" --build-arg SOIL_REQUIREMENTS="which bash zip tar git" --build-arg TAP_REQUIREMENTS="diffutils"
+    --build-arg WHICH_FARMER="${WHICH_FARMER}"
 ./clear pod "${WHICH_POD}"
 "$(which podman)" run --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z \
     --workdir="${HUSK_HOME}" --user "${WHICH_FARMER}" -it "${WHICH_POD}" "/bin/bash"

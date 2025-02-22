@@ -1,2 +1,2 @@
-WHICH_FARM="${HUSK_HOME}/${FARM_HOME}/swift.darkmatter.farm.fedora.soil"
+WHICH_FARM="${HUSK_HOME}/${FARM_HOME}/swift.darkmatter.farm.${WHICH_SOIL}"
 INCLUDE="statistics.txt"

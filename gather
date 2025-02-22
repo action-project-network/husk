@@ -111,7 +111,7 @@ function getSeed() {
 
 source "${HUSK_HOME}/${RAKE_PATH}.husk"
 COB_RESOLVED=""
-SOIL_REQUIREMENTS_RESOLVED="which bash zip tar"
+SOIL_REQUIREMENTS_RESOLVED="which bash zip tar git"
 TAP_REQUIREMENTS_RESOLVED=""
 for SEED in "${COB[@]}"
 do

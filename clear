@@ -21,7 +21,7 @@ function removeLog() {
 }
 
 function removeAllLogs() {
-    rm -rf "./.log/*"
+    rm -rf "./.log"
 }
 
 function removeImage() {
@@ -41,7 +41,7 @@ function removeCob() {
 function removeAllCobs() {
     find "./silo/cobs" -name "*.cob" -type f -delete
     find "./silo/cobs" -name "*.soil" -type f -delete
-    rm -rf "./.cob/*"
+    rm -rf "./.cob"
 }
 
 function removeAllSeeds() {
@@ -56,7 +56,7 @@ function removeFarm() {
 }
 
 function removeAllFarms() {
-    rm -rf "./.farm/*"
+    rm -rf "./.farm"
 }
 
 function removeHarvest() {
@@ -64,7 +64,7 @@ function removeHarvest() {
 }
 
 function removeAllHarvests() {
-    rm -rf "./.harvest/*"
+    rm -rf "./.harvest"
 }
 
 if [[ "${@}" =~ ^pod' '.*$ ]]; then
@@ -106,4 +106,5 @@ elif [[ "${@}" =~ ^all$ ]]; then
     removeAllFarms
     removeAllHarvests
     removeAllLogs
+    rm -rf "./.husk"
 fi

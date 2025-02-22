@@ -1,5 +1,5 @@
 STEPS=(
-    "$(which tar) -xvf "${REPOSITORY}" -C /tmp"
+    "mkdir -p /tmp && $(which tar) -xvf "${REPOSITORY}" -C /tmp"
     "cp -rf /tmp/${SOURCE}/${WHICH_SIMULATION}/* ./"
     "printf 'Restarts:\n\tdelta_hours: \t0.01\n' >> ./${WHICH_PARAMETERS}"
     "if [[ ! -e ${INITIAL_CONDITIONS} ]]; then ./getIC.sh; fi"

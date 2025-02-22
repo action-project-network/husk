@@ -1,2 +1,1 @@
-SOIL_REQUIREMENTS=(gcc make)
-TAP_REQUIREMENTS=(diffutils)
+SOIL_REQUIREMENTS=(gcc make diffutils)

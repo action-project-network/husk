@@ -4,9 +4,6 @@
 set -ueox pipefail
 source "${HUSK_HOME}/rake" "${1}" "${2}"
 source "${HUSK_HOME}/$(dirname "${RAKE_PATH}")/.plough"
-if [[ -f "/home/$(whoami)/.venv/bin/activate" ]]; then
-    source "/home/$(whoami)/.venv/bin/activate"
-fi
 mkdir -p "${WHICH_FIELD}"
 cd "${WHICH_FIELD}"
 "${HUSK_HOME}/unshell" "${WHICH_SILO}" "${WHICH_SOIL}" "${HUSK_HOME}/$(dirname "${RAKE_PATH}")/.plough" "${HUSK_HOME}/${RAKE_PATH}" "${WHICH_FIELD}"

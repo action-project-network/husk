@@ -13,4 +13,4 @@ WHICH_FARMER="${2}"
     --build-arg WHICH_FARMER="${WHICH_FARMER}"
 ./clear pod "${WHICH_POD}"
 "$(which podman)" run --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z \
-    --workdir="${HUSK_HOME}" --user "${WHICH_FARMER}" -it "${WHICH_POD}" "/bin/bash"
+    --workdir="${HUSK_HOME}" --userns=keep-id  --user "${WHICH_FARMER}" -it "${WHICH_POD}" "/bin/bash"

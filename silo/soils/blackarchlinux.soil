@@ -1,0 +1,11 @@
+FROM blackarchlinux/blackarch:base
+ARG SOIL_REQUIREMENTS
+ARG PIP_REQUIREMENTS
+ARG WHICH_FARMER
+RUN /bin/bash -c 'if [[ -n $SOIL_REQUIREMENTS ]]; then pacman -Sy --noconfirm $SOIL_REQUIREMENTS; fi'
+RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then pacman -Sy --noconfirm python3 python-pip; fi'
+RUN /bin/bash -c 'if [[ ! $WHICH_FARMER =~ ^root$ ]]; then groupadd $WHICH_FARMER; fi'
+RUN /bin/bash -c 'if [[ ! $WHICH_FARMER =~ ^root$ ]]; then useradd -m -g $WHICH_FARMER $WHICH_FARMER; fi'
+USER $WHICH_FARMER
+RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then python3 -m venv /home/$WHICH_FARMER/.venv/; fi'
+RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then source /home/$WHICH_FARMER/.venv/bin/activate && pip install $PIP_REQUIREMENTS; fi'

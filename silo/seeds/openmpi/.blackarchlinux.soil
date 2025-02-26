@@ -1,0 +1,1 @@
+SOIL_REQUIREMENTS=(gcc make autoconf automake libtool)

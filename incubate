@@ -14,8 +14,8 @@ if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then
     ./clear pod "${WHICH_POD}"
 
     "$(which podman)" run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z \
-        -e HUSK_HOME="${HUSK_HOME}" --workdir="${HUSK_HOME}" --user "$(whoami)" \
-        -t "${WHICH_POD}" "$(which bash)" "${HUSK_HOME}/uncob" "${WHICH_SILO}" "${WHICH_SOIL}"
+        -e HUSK_HOME="${HUSK_HOME}" --userns=keep-id --workdir="${HUSK_HOME}" --user "$(whoami)" \
+        -t "${WHICH_POD}" "/bin/bash" "${HUSK_HOME}/uncob" "${WHICH_SILO}" "${WHICH_SOIL}"
 
 elif [[ "${WHICH_SILO}" =~ .*farm$ ]] || [[ "${WHICH_SILO}" =~ .*harvest$ ]]; then
     PREVIOUS_POD=$("$(which podman)" container ls --filter "name=${WHICH_POD}" --format='{{.ID}}')
@@ -25,8 +25,8 @@ elif [[ "${WHICH_SILO}" =~ .*farm$ ]] || [[ "${WHICH_SILO}" =~ .*harvest$ ]]; th
         ./clear pod "${WHICH_POD}"
         
         "$(which podman)" run -d --name "${WHICH_POD}" -v "${HUSK_HOME}":"${HUSK_HOME}":z \
-            -e HUSK_HOME="${HUSK_HOME}" --workdir="${HUSK_HOME}" --user "$(whoami)" \
-            -t "${WHICH_POD}" "$(which bash)" "${HUSK_HOME}/plough" "${WHICH_SILO}" "${WHICH_SOIL}"
+            -e HUSK_HOME="${HUSK_HOME}" --userns=keep-id --workdir="${HUSK_HOME}" --user "$(whoami)" \
+            -t "${WHICH_POD}" "/bin/bash" "${HUSK_HOME}/plough" "${WHICH_SILO}" "${WHICH_SOIL}"
     fi
 else
     echo "cannot incubate unsupported silo, can be cob or farm" && exit 1

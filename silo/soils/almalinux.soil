@@ -1,9 +1,13 @@
 FROM almalinux:9.5
 ARG SOIL_REQUIREMENTS
 ARG PIP_REQUIREMENTS
+ARG TAP_REQUIREMENTS
 ARG WHICH_FARMER
 RUN /bin/bash -c 'if [[ -n $SOIL_REQUIREMENTS ]]; then dnf install -y $SOIL_REQUIREMENTS; fi'
 RUN /bin/bash -c 'if [[ -n $PIP_REQUIREMENTS ]]; then dnf install -y python3 pip; fi'
+RUN /bin/bash -c 'if [[ -n $TAP_REQUIREMENTS ]]; then curl -o /tmp/install.sh -O https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh; fi'
+RUN /bin/bash -c 'if [[ -n $TAP_REQUIREMENTS ]]; then chmod +x /tmp/install.sh && ./tmp/install.sh && rm -rf /tmp/install.sh; fi'
+RUN /bin/bash -c 'if [[ -n $TAP_REQUIREMENTS ]]; then /home/linuxbrew/.linuxbrew/bin/brew install $TAP_REQUIREMENTS; fi'
 RUN /bin/bash -c 'if [[ ! $WHICH_FARMER =~ ^root$ ]]; then groupadd $WHICH_FARMER; fi'
 RUN /bin/bash -c 'if [[ ! $WHICH_FARMER =~ ^root$ ]]; then useradd -m -g $WHICH_FARMER $WHICH_FARMER; fi'
 USER $WHICH_FARMER

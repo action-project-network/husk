@@ -1,3 +1,3 @@
-SOIL_REQUIREMENTS="git"
+SOIL_REQUIREMENTS="git procps"
 TAP_REQUIREMENTS="texlive diffutils"
 PIP_REQUIREMENTS="matplotlib==3.9.4 swiftsimio==8.0.1 scipy==1.13.1 pylatex==1.4.2"

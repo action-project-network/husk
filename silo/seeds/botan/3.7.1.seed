@@ -1,0 +1,4 @@
+URL="https://github.com/randombit/botan/archive/refs/tags/3.7.1.tar.gz"
+CHECKSUM="8d2a072c7cdca6cadd16f89bb966fce1b3ec77cb4614bf1d87dec1337a3d2330"
+SOURCE="botan-3.7.1"
+THIS_SEED="botan"

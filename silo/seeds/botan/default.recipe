@@ -1,0 +1,7 @@
+STEPS=(
+    "./configure.py \
+        --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED} \
+        --disable-shared-library"
+    "make -j16 all"
+    "make install"
+)

@@ -1,6 +1,6 @@
 STEPS=(
     "FITSDIR=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/cfitsio/lib FITSINC=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/cfitsio/include C_SHARED=0 C_FITS=1 ./configure --auto=c"
-    "make -j4 c-all"
+    "make -j16 c-all"
     "make c-test"
     "mkdir -p ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED}"
     "cp -R * ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED}"

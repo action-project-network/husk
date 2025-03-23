@@ -4,14 +4,10 @@
 set -ueox pipefail
 source "${HUSK_HOME}/home"
 WHICH_SILO="${1}"
-RAKE_PATH="${1//.//}"
-if [[ "${WHICH_SILO}" =~ .*cob$ ]]; then
-    RAKE_PATH="silo/cobs/${RAKE_PATH///cob/}.cob"
-elif [[ "${WHICH_SILO}" =~ .*farm$ ]]; then
-    RAKE_PATH="silo/farms/${RAKE_PATH///farm/}.farm"
-elif [[ "${WHICH_SILO}" =~ .*harvest$ ]]; then
-    RAKE_PATH="silo/harvests/${RAKE_PATH///harvest/}.harvest"
-fi
+THIS_SEED="$(echo "${WHICH_SILO}" | cut -d "_" -f 1)"
+THIS_VERSION="$(echo "${WHICH_SILO}" | cut -d "_" -f 2)"
+THIS_RECIPE="$(echo "${WHICH_SILO}" | cut -d "_" -f 3 | cut -d "." -f 1)"
+RAKE_PATH="silo/cobs/${THIS_SEED}/${THIS_VERSION}/${THIS_RECIPE}"
 WHICH_SOIL="${2}"
 if [[ ! "${WHICH_SOIL}" =~ .*soil$ ]] && [[ ! "${WHICH_SOIL}" =~ .*.soil.revived$ ]]; then
     echo "usage: ./rake some.cob some.soil" && exit 1

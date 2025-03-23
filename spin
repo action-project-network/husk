@@ -7,7 +7,7 @@ source "${HUSK_HOME}/rake" "${1}" "${2}"
 SOIL_REQUIREMENTS=""
 TAP_REQUIREMENTS=""
 PIP_REQUIREMENTS=""
-source "$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
+source "${RAKE_PATH}/.${WHICH_SOIL}"
 "$(which podman)" build --no-cache -t "${WHICH_POD}" -f "./silo/soils/${WHICH_SOIL}" . \
     --build-arg SOIL_REQUIREMENTS="${SOIL_REQUIREMENTS}" \
     --build-arg TAP_REQUIREMENTS="${TAP_REQUIREMENTS}" \

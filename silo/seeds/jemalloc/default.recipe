@@ -1,6 +1,6 @@
 STEPS=(
     "./autogen.sh"
     "./configure -prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED} --enable-shared=no"
-    "make"
+    "make  -j16"
     "make install"
 )

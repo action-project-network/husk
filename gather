@@ -109,7 +109,7 @@ function getSeed() {
     fi
 }
 
-source "${HUSK_HOME}/${RAKE_PATH}.husk"
+source "${HUSK_HOME}/${RAKE_PATH}/kernel"
 COB_RESOLVED=""
 SOIL_REQUIREMENTS_RESOLVED="which bash zip unzip tar git"
 TAP_REQUIREMENTS_RESOLVED=""
@@ -118,14 +118,14 @@ do
     getSeed "${SEED}"
 done
 
-rm -rf "${HUSK_HOME}/${RAKE_PATH}"
-touch "${HUSK_HOME}/${RAKE_PATH}"
-printf "COB=(${COB_RESOLVED[@]})" >> "${HUSK_HOME}/${RAKE_PATH}"
+rm -rf "${HUSK_HOME}/${RAKE_PATH}/.cob"
+touch "${HUSK_HOME}/${RAKE_PATH}/.cob"
+printf "COB=(${COB_RESOLVED[@]})" >> "${HUSK_HOME}/${RAKE_PATH}/.cob"
 
-rm -rf "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
-touch "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
-printf "SOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS_RESOLVED}\"" >> "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
+rm -rf "${HUSK_HOME}/${RAKE_PATH}/.${WHICH_SOIL}"
+touch "${HUSK_HOME}/${RAKE_PATH}/.${WHICH_SOIL}"
+printf "SOIL_REQUIREMENTS=\"${SOIL_REQUIREMENTS_RESOLVED}\"" >> "${HUSK_HOME}/${RAKE_PATH}/.${WHICH_SOIL}"
 if [[ -n "${TAP_REQUIREMENTS_RESOLVED}" ]]; then
-    printf "\nTAP_REQUIREMENTS=\"${TAP_REQUIREMENTS_RESOLVED}\"" >> "${HUSK_HOME}/$(dirname ${RAKE_PATH})/.${WHICH_SOIL}"
+    printf "\nTAP_REQUIREMENTS=\"${TAP_REQUIREMENTS_RESOLVED}\"" >> "${HUSK_HOME}/${RAKE_PATH}/.${WHICH_SOIL}"
 fi
 rm -rf "${EPHEMERAL}"

@@ -1,6 +1,6 @@
 STEPS=(
     "./configure --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED} --static"
-    "make -j4"
+    "make -j16"
     "make test"
     "make install"
 )

@@ -8,7 +8,7 @@ STEPS=(
     "mkdir -p ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/grackle"
     "make clean"
     "make machine-fedora"
-    "make"
+    "make -j16"
     "mkdir -p ${HUSK_HOME}/${COB_HOME}/${WHICH_POD}"
     "make install"
 )

@@ -4,7 +4,7 @@ STEPS=(
         --enable-shared=no \
         --enable-build-mode=production \
         --enable-parallel"
-    "make -j4"
+    "make -j16"
     "make check"
     "make install"
     "make check-install"

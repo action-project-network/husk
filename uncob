@@ -3,7 +3,7 @@
 # Date: 01/30/2025
 set -ueox pipefail
 source "${HUSK_HOME}/rake" "${1}" "${2}"
-source "${HUSK_HOME}/${RAKE_PATH}"
+source "${HUSK_HOME}/${RAKE_PATH}/.cob"
 for WHICH_KERNEL in "${COB[@]}"; do
     if [ ! -d "${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/$(echo "${WHICH_KERNEL}" | cut -d "_" -f 1)" ]; then
         "${HUSK_HOME}/sprout" "${WHICH_SILO}" "${WHICH_SOIL}" "${WHICH_KERNEL}"

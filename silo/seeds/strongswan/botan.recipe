@@ -1,0 +1,13 @@
+STEPS=(
+    "export botan_CFLAGS=\"-I${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/botan/include/botan-3\" && \
+        export botan_LIBS=\"-L${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/botan/libs/\" && \
+        ./configure \
+            --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED} \
+            --with-botan \
+            --enable-botan"
+    "make -j16 all"
+    "make install"
+)
+NEEDS=(
+    botan_3.7.1_default
+)

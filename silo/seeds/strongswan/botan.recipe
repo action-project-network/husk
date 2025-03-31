@@ -4,7 +4,8 @@ STEPS=(
         ./configure \
             --prefix=${HUSK_HOME}/${COB_HOME}/${WHICH_POD}/${THIS_SEED} \
             --with-botan \
-            --enable-botan"
+            --enable-botan \
+            --enable-cmd"
     "make -j16 all"
     "make install"
 )
